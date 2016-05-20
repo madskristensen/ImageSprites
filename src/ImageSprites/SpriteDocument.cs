@@ -2,14 +2,23 @@
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace ImageSprites
 {
     public class SpriteDocument
     {
+        public SpriteDocument()
+        { }
+
         public SpriteDocument(string fileName)
+            : this(fileName, null)
+        { }
+
+        public SpriteDocument(string fileName, IEnumerable<string> images)
         {
             FileName = fileName;
+            Images = images;
         }
 
         [JsonIgnore]
@@ -32,7 +41,7 @@ namespace ImageSprites
         {
             get
             {
-               return "." + Format.ToString().ToLowerInvariant();
+                return "." + Format.ToString().ToLowerInvariant();
             }
         }
 
@@ -61,14 +70,45 @@ namespace ImageSprites
 
         public async Task Save()
         {
-            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            var settings = new JsonSerializerSettings();
+            settings.Formatting = Formatting.Indented;
+            settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+            var json = JsonConvert.SerializeObject(this, settings);
 
             using (var writer = new StreamWriter(FileName))
             {
-                FileEvents.OnSaving(FileName);
+                OnSaving(FileName);
                 await writer.WriteAsync(json).ConfigureAwait(false);
-                FileEvents.OnSaved(FileName);
+                OnSaved(FileName);
             }
         }
+
+        private static void OnSaving(string fileName)
+        {
+            if (Saving != null)
+            {
+                var type = File.Exists(fileName) ? WatcherChangeTypes.Changed : WatcherChangeTypes.Created;
+                var dir = Path.GetDirectoryName(fileName);
+                var name = Path.GetFileName(fileName);
+
+                Saving(null, new FileSystemEventArgs(type, dir, name));
+            }
+        }
+
+        private static void OnSaved(string fileName)
+        {
+            if (Saved != null)
+            {
+                var type = File.Exists(fileName) ? WatcherChangeTypes.Changed : WatcherChangeTypes.Created;
+                var dir = Path.GetDirectoryName(fileName);
+                var name = Path.GetFileName(fileName);
+
+                Saved(null, new FileSystemEventArgs(type, dir, name));
+            }
+        }
+
+        public static event FileSystemEventHandler Saving;
+        public static event FileSystemEventHandler Saved;
     }
 }

@@ -1,0 +1,9 @@
+[$RootKey$\ShellFileAssociations\.sprite]
+"DefaultIconMoniker"="KnownMonikers.PerformanceGroup"
+
+// Website project file nesting
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite]
+"RelationType"=dword:00000001
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.png]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.gif]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.jpg]

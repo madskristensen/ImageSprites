@@ -8,7 +8,7 @@ namespace ImageSprites
 {
     public static class SpriteGenerator
     {
-        public static IEnumerable<SpriteFragment> MakeImage(SpriteDocument doc)
+        public static IEnumerable<SpriteFragment> Generate(SpriteDocument doc)
         {
             Dictionary<string, Image> images = GetImages(doc);
 
@@ -29,9 +29,9 @@ namespace ImageSprites
 
                 string outputFile = Path.ChangeExtension(doc.FileName, doc.OutputExtension);
 
-                FileEvents.OnSaving(outputFile);
+                OnSaving(outputFile, doc);
                 bitmap.Save(outputFile, ImageHelpers.ExtensionFromFormat(doc.Format));
-                FileEvents.OnSaved(outputFile);
+                OnSaved(outputFile, doc);
             }
 
             return fragments;
@@ -88,5 +88,18 @@ namespace ImageSprites
 
             return images;
         }
+
+        private static void OnSaving(string fileName, SpriteDocument doc)
+        {
+            Saving?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
+        }
+
+        private static void OnSaved(string fileName, SpriteDocument doc)
+        {
+            Saved?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
+        }
+
+        public static event SpriteImageGenerationEventHandler Saving;
+        public static event SpriteImageGenerationEventHandler Saved;
     }
 }

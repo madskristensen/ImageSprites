@@ -2,8 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ox04djmajibm3qqv?svg=true)](https://ci.appveyor.com/project/madskristensen/imagesprites)
 
-<!-- Update the VS Gallery link after you upload the VSIX-->
-Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/[GuidFromGallery])
+Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/8bb845e9-5717-4eae-aed3-1fdf6fe5819a)
 or get the [CI build](http://vsixgallery.com/extension/cd92c0c6-2c32-49a3-83ca-0dc767c7d78e/).
 
 ---------------------------------------

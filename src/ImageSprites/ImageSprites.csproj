@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileEvents.cs" />
     <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="ImageType.cs" />
     <Compile Include="SpriteDirection.cs" />
@@ -53,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteFragment.cs" />
     <Compile Include="SpriteGenerator.cs" />
+    <Compile Include="SpriteImageGeneratedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

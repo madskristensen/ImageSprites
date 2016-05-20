@@ -4,6 +4,7 @@
         <Identity Id="cd92c0c6-2c32-49a3-83ca-0dc767c7d78e" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>Image Sprites</DisplayName>
         <Description xml:space="preserve">Boost your website's performance by creating image sprites to reduce the amount of HTTP requests needed.</Description>
+        <License>Resources\LICENSE</License>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Preview.png</PreviewImage>
         <Tags>image, sprite, jpg, gif, png</Tags>
@@ -17,5 +18,7 @@
     </Dependencies>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="File" Path="ContentType\registry.pkgdef" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
     </Assets>
 </PackageManifest>

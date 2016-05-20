@@ -24,5 +24,6 @@ namespace ImageSpritesVsix
     {
         public const int MenuGroup = 0x1020;
         public const int CreateSprite = 0x0100;
+        public const int UpdateSprite = 0x0200;
     }
 }

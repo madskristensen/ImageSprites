@@ -1,109 +1,89 @@
-﻿//------------------------------------------------------------------------------
-// <copyright file="CreateSprite.cs" company="Company">
-//     Copyright (c) Company.  All rights reserved.
-// </copyright>
-//------------------------------------------------------------------------------
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using ImageSprites;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 
 namespace ImageSpritesVsix
 {
-    /// <summary>
-    /// Command handler
-    /// </summary>
     internal sealed class CreateSpriteCommand
     {
-        /// <summary>
-        /// Command ID.
-        /// </summary>
-        public const int CommandId = 0x0100;
+        private readonly Package _package;
 
-        /// <summary>
-        /// Command menu group (command set GUID).
-        /// </summary>
-        public static readonly Guid CommandSet = new Guid("ad408e80-5054-4184-b141-830702b6346c");
-
-        /// <summary>
-        /// VS Package that provides this command, not null.
-        /// </summary>
-        private readonly Package package;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CreateSpriteCommand"/> class.
-        /// Adds our command handlers for menu (commands must exist in the command table file)
-        /// </summary>
-        /// <param name="package">Owner package, not null.</param>
         private CreateSpriteCommand(Package package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            _package = package;
 
-            this.package = package;
+            var commandService = (OleMenuCommandService)ServiceProvider.GetService(typeof(IMenuCommandService));
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (commandService != null)
-            {
-                var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
-                commandService.AddCommand(menuItem);
-            }
+            var id = new CommandID(PackageGuids.guidImageSpriteCmdSet, PackageIds.CreateSprite);
+            var cmd = new OleMenuCommand(Execute, id);
+            cmd.BeforeQueryStatus += BeforeQueryStatus;
+            commandService.AddCommand(cmd);
         }
 
-        /// <summary>
-        /// Gets the instance of the command.
-        /// </summary>
-        public static CreateSpriteCommand Instance
-        {
-            get;
-            private set;
-        }
+        public static CreateSpriteCommand Instance { get; private set; }
 
-        /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
         private IServiceProvider ServiceProvider
         {
-            get
-            {
-                return this.package;
-            }
+            get { return _package; }
         }
 
-        /// <summary>
-        /// Initializes the singleton instance of the command.
-        /// </summary>
-        /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
         {
             Instance = new CreateSpriteCommand(package);
         }
 
-        /// <summary>
-        /// This function is the callback used to execute the command when the menu item is clicked.
-        /// See the constructor to see how the menu item is associated with this function using
-        /// OleMenuCommandService service and MenuCommand class.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        private void MenuItemCallback(object sender, EventArgs e)
+        private void BeforeQueryStatus(object sender, EventArgs e)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "CreateSprite";
+            var button = (OleMenuCommand)sender;
+            var files = GetFiles();
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.ServiceProvider,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            button.Enabled = button.Visible = files.Any();
+        }
+
+        private async void Execute(object sender, EventArgs e)
+        {
+            var files = GetFiles();
+            var folder = Path.GetDirectoryName(files.First());
+            string spriteFile;
+
+            if (GetFileName(folder, out spriteFile))
+            {
+                var doc = new SpriteDocument(spriteFile);
+                doc.Images = files.Select(f => PackageUtilities.MakeRelative(spriteFile, f));
+
+                await doc.Save();
+                await SpriteService.GenerateSprite(doc);
+            }
+        }
+
+        private bool GetFileName(string initialDirectory, out string fileName)
+        {
+            fileName = null;
+
+            using (var dialog = new SaveFileDialog())
+            {
+                dialog.InitialDirectory = initialDirectory;
+                dialog.FileName = "myfile" + Constants.FileExtension;
+                dialog.DefaultExt = Constants.FileExtension;
+                dialog.Filter = "Sprite files | *" + Constants.FileExtension;
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return false;
+
+                fileName = dialog.FileName;
+            }
+
+            return true;
+        }
+
+        private IEnumerable<string> GetFiles()
+        {
+            return ProjectHelpers.GetSelectedItemPaths().Where(file => Constants.SupporedExtensions.Contains(Path.GetExtension(file)));
         }
     }
 }

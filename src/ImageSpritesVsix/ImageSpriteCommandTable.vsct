@@ -13,7 +13,7 @@
         <Buttons>
             <Button guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0100" type="Button">
                 <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
-                <Icon guid="ImageCatalogGuid" id="ImageGroup" />
+                <Icon guid="ImageCatalogGuid" id="PerformanceGroup" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <CommandFlag>DefaultDisabled</CommandFlag>
@@ -22,12 +22,27 @@
                     <ButtonText>Create Image Sprite</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidImageSpriteCmdSet" id="UpdateSprite" priority="0x0100" type="Button">
+                <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
+                <Icon guid="ImageCatalogGuid" id="PerformanceGroup" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultDisabled</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Update Image Sprite</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
     <CommandPlacements>
-        <CommandPlacement guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0200">
+        <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
             <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+        </CommandPlacement>
+        <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
         </CommandPlacement>
     </CommandPlacements>
 
@@ -37,6 +52,7 @@
         <GuidSymbol name="guidImageSpriteCmdSet" value="{ad408e80-5054-4184-b141-830702b6346c}">
             <IDSymbol name="MenuGroup" value="0x1020" />
             <IDSymbol name="CreateSprite" value="0x0100" />
+            <IDSymbol name="UpdateSprite" value="0x0200" />
         </GuidSymbol>
     </Symbols>
 </CommandTable>

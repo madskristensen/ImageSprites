@@ -6,7 +6,6 @@ namespace ImageSpritesVsix
     class SpriteContentTypeDefinition
     {
         public const string SpriteContentType = "Sprite";
-        private const string SpriteFileExtension = ".Sprite";
 
         [Export(typeof(ContentTypeDefinition))]
         [Name(SpriteContentType)]
@@ -15,7 +14,7 @@ namespace ImageSpritesVsix
 
         [Export(typeof(FileExtensionToContentTypeDefinition))]
         [ContentType(SpriteContentType)]
-        [FileExtension(SpriteFileExtension)]
+        [FileExtension(Constants.FileExtension)]
         public FileExtensionToContentTypeDefinition SpriteFileExtensionDefinition { get; set; }
     }
 }
