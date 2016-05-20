@@ -1,0 +1,13 @@
+{
+  "images": [
+    "images/96dpi/a.png",
+    "images/96dpi/b.png",
+    "images/96dpi/c.png",
+    "images/96dpi/d.png",
+    "images/96dpi/e.png",
+    "images/96dpi/f.png"
+  ],
+  "direction": "horizontal",
+  "padding": "20",
+  "format": "jpg"
+}

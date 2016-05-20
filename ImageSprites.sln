@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSpritesVsix", "src\ImageSpritesVsix\ImageSpritesVsix.csproj", "{D6AC6895-FAB6-4B0A-96AE-4FC1EFBB758E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSprites", "src\ImageSprites\ImageSprites.csproj", "{AB5AE1E7-8362-4A97-A8F9-3939BE8470C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSpritesTest", "test\ImageSpritesTest\ImageSpritesTest.csproj", "{6A23F2E8-DEFF-48AB-8844-D55D811229C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7B668AA-ADC5-4D1A-A42B-B7B02C99C6C7}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		CHANGELOG.md = CHANGELOG.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6AC6895-FAB6-4B0A-96AE-4FC1EFBB758E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6AC6895-FAB6-4B0A-96AE-4FC1EFBB758E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6AC6895-FAB6-4B0A-96AE-4FC1EFBB758E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6AC6895-FAB6-4B0A-96AE-4FC1EFBB758E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5AE1E7-8362-4A97-A8F9-3939BE8470C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5AE1E7-8362-4A97-A8F9-3939BE8470C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5AE1E7-8362-4A97-A8F9-3939BE8470C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5AE1E7-8362-4A97-A8F9-3939BE8470C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A23F2E8-DEFF-48AB-8844-D55D811229C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A23F2E8-DEFF-48AB-8844-D55D811229C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A23F2E8-DEFF-48AB-8844-D55D811229C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A23F2E8-DEFF-48AB-8844-D55D811229C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

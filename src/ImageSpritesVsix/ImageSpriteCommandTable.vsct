@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <Extern href="stdidcmd.h"/>
+    <Extern href="vsshlids.h"/>
+    <Include href="KnownImageIds.vsct"/>
+
+    <Commands package="guidPackage">
+        <Groups>
+            <Group guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0600" />
+        </Groups>
+
+        <Buttons>
+            <Button guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0100" type="Button">
+                <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
+                <Icon guid="ImageCatalogGuid" id="ImageGroup" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultDisabled</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Create Image Sprite</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
+    </Commands>
+
+    <CommandPlacements>
+        <CommandPlacement guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0200">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+        </CommandPlacement>
+    </CommandPlacements>
+
+    <Symbols>
+        <GuidSymbol name="guidPackage" value="{0c4c1075-3865-436a-925a-7b97a641c9e0}" />
+
+        <GuidSymbol name="guidImageSpriteCmdSet" value="{ad408e80-5054-4184-b141-830702b6346c}">
+            <IDSymbol name="MenuGroup" value="0x1020" />
+            <IDSymbol name="CreateSprite" value="0x0100" />
+        </GuidSymbol>
+    </Symbols>
+</CommandTable>
