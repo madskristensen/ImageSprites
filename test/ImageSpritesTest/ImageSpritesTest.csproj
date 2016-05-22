@@ -72,13 +72,9 @@
     <Content Include="Artifacts\Images\384dpi\d.png" />
     <Content Include="Artifacts\Images\384dpi\e.png" />
     <Content Include="Artifacts\Images\384dpi\f.png" />
-    <Content Include="Artifacts\Images\384dpi\g.png" />
-    <Content Include="Artifacts\Images\384dpi\h.png" />
     <Content Include="Artifacts\Images\96dpi\a.png" />
     <Content Include="Artifacts\Images\96dpi\b.png" />
     <Content Include="Artifacts\Images\96dpi\c.png" />
-    <Content Include="Artifacts\Images\96dpi\g.png" />
-    <Content Include="Artifacts\Images\96dpi\h.png" />
     <Content Include="Artifacts\Images\96dpi\f.png" />
     <Content Include="Artifacts\Images\96dpi\e.png" />
     <Content Include="Artifacts\Images\96dpi\d.png" />
@@ -106,7 +102,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
+      <UserProperties Artifacts_4png384_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

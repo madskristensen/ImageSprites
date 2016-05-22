@@ -52,6 +52,7 @@ is stored. It looks like this:
 	],
 	"direction": "horizontal",
 	"padding": 10,
+    "dpi": 96,
 	"optimize": "lossy",
 	"format": "png",
 	"stylesheets": {
@@ -70,6 +71,8 @@ horizontally or vertically.
 
 **padding** is the distance of whitespace inserted around each
 individual image in the sprite. The value is in pixels.
+
+**dpi** sets the resolution of the image. 96 is the default value.
 
 **optimize** controls how the generated image sprite should be
 optimized. Choose from *lossless*, *lossy* or *none*. This
