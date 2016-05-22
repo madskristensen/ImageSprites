@@ -46,7 +46,7 @@ namespace ImageSprites
 
             foreach (string file in images.Keys)
             {
-                Image img = images[file];
+                var img = images[file];
                 fragments.Add(new SpriteFragment(file, img.Width, img.Height, margin, currentY));
 
                 canvas.DrawImage(img, margin, currentY);
@@ -60,7 +60,7 @@ namespace ImageSprites
 
             foreach (string file in images.Keys)
             {
-                Image img = images[file];
+                var img = images[file];
                 fragments.Add(new SpriteFragment(file, img.Width, img.Height, currentX, margin));
 
                 canvas.DrawImage(img, currentX, margin);

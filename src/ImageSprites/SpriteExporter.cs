@@ -31,7 +31,7 @@ namespace ImageSprites
                 }
 
                 if (File.Exists(outputFile) && File.ReadAllText(outputFile) == sb.ToString())
-                    return;
+                    continue;
 
                 Directory.CreateDirectory(outputDirectory);
 

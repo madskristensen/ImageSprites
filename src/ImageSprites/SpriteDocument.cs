@@ -51,7 +51,7 @@ namespace ImageSprites
         public ImageType Format { get; set; } = ImageType.Png;
 
         [JsonProperty("stylesheets")]
-        public Stylesheet Stylesheets { get; set; }
+        public Stylesheet Stylesheets { get; set; } = new Stylesheet();
 
         [JsonProperty("dpi")]
         public int Resolution { get; set; } = 96;
