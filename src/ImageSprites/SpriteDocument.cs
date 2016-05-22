@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -13,13 +15,21 @@ namespace ImageSprites
         { }
 
         public SpriteDocument(string fileName)
-            : this(fileName, null)
+            : this(fileName, Enumerable.Empty<string>())
         { }
 
         public SpriteDocument(string fileName, IEnumerable<string> images)
         {
             FileName = fileName;
             Images = images;
+
+            if (images.Any())
+            {
+                var first = Image.FromFile(images.First());
+                Resolution = (int)Math.Round(first.HorizontalResolution);
+
+                Format = ImageHelpers.GetImageFormatFromExtension(images.First());
+            }
         }
 
         [JsonIgnore]
@@ -42,6 +52,9 @@ namespace ImageSprites
 
         [JsonProperty("stylesheets")]
         public Stylesheet Stylesheets { get; set; }
+
+        [JsonProperty("dpi")]
+        public int Resolution { get; set; } = 96;
 
         [JsonIgnore]
         public string OutputExtension

@@ -11,6 +11,11 @@
       "enum": [ "horizontal", "vertical" ],
       "default": "vertical"
     },
+    "dpi": {
+      "description": "Optional. The image resolution of the generated image sprite",
+      "type": "integer",
+      "default": 96
+    },
     "format": {
       "description": "Optional. Output format of the generated image sprite.",
       "enum": [ "png", "jpg", "gif" ],

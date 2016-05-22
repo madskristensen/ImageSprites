@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Configurable DPI settings
+- [x] Better defaults based on input images
+- [x] Configurable DPI settings
 - [ ] Command to update all sprites in solution
 
 Features that have a checkmark are complete and available for

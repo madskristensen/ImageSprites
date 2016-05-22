@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +47,30 @@ namespace ImageSpritesTest
             {
                 File.Delete(imgFile);
                 File.Delete(lessFile);
+            }
+        }
+
+        [TestMethod]
+        public async Task Png384Dpi()
+        {
+            var fileName = Path.Combine(_artifacts, "png384.sprite");
+            var imgFile = Path.ChangeExtension(fileName, ".png");
+
+            try
+            {
+                var doc = await SpriteDocument.FromFile(fileName);
+                await _generator.Generate(doc);
+
+                using (var image = Image.FromFile(imgFile))
+                {
+                    Assert.AreEqual(384, Math.Round(image.HorizontalResolution), "Not 384 DPI");
+                    Assert.AreEqual(166, image.Height); // 16 + padding
+                    Assert.AreEqual(36, image.Width); // 16 * 6 + padding
+                }
+            }
+            finally
+            {
+                File.Delete(imgFile);
             }
         }
     }

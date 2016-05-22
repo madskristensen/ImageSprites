@@ -19,7 +19,7 @@
                 <CommandFlag>DefaultDisabled</CommandFlag>
                 <CommandFlag>DefaultInvisible</CommandFlag>
                 <Strings>
-                    <ButtonText>Create Image Sprite</ButtonText>
+                    <ButtonText>Create Image Sprite...</ButtonText>
                 </Strings>
             </Button>
 

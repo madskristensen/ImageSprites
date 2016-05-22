@@ -11,7 +11,7 @@ namespace ImageSprites
     {
         public async Task Generate(SpriteDocument doc)
         {
-            Dictionary<string, Image> images = GetImages(doc);
+            Dictionary<string, Bitmap> images = GetImages(doc);
 
             int width = doc.Direction == Direction.Vertical ? images.Values.Max(i => i.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Width) + (doc.Padding * images.Count) + doc.Padding;
             int height = doc.Direction == Direction.Vertical ? images.Values.Sum(img => img.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Height) + (doc.Padding * 2);
@@ -20,6 +20,8 @@ namespace ImageSprites
 
             using (var bitmap = new Bitmap(width, height))
             {
+                bitmap.SetResolution(doc.Resolution, doc.Resolution);
+
                 using (Graphics canvas = Graphics.FromImage(bitmap))
                 {
                     if (doc.Direction == Direction.Vertical)
@@ -38,7 +40,7 @@ namespace ImageSprites
             await SpriteExporter.ExportStylesheet(fragments, doc, this);
         }
 
-        private static void Vertical(Dictionary<string, Image> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
+        private static void Vertical(Dictionary<string, Bitmap> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
         {
             int currentY = margin;
 
@@ -52,7 +54,7 @@ namespace ImageSprites
             }
         }
 
-        private static void Horizontal(Dictionary<string, Image> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
+        private static void Horizontal(Dictionary<string, Bitmap> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
         {
             int currentX = margin;
 
@@ -66,25 +68,21 @@ namespace ImageSprites
             }
         }
 
-        private static Dictionary<string, Image> GetImages(SpriteDocument sprite)
+        private static Dictionary<string, Bitmap> GetImages(SpriteDocument doc)
         {
-            Dictionary<string, Image> images = new Dictionary<string, Image>();
+            Dictionary<string, Bitmap> images = new Dictionary<string, Bitmap>();
 
-            foreach (string file in sprite.ToAbsoluteImages())
+            foreach (string file in doc.ToAbsoluteImages())
             {
                 if (!File.Exists(file))
                 {
                     throw new FileNotFoundException("One or more sprite input files don't exist", file);
                 }
 
-                Image image = Image.FromFile(file);
+                var bitmap = (Bitmap)Image.FromFile(file);
+                bitmap.SetResolution(doc.Resolution, doc.Resolution);
 
-                // Only touch the resolution of the image if it isn't 96.
-                // That way we keep the original image 'as is' in all other cases.
-                if (Math.Round(image.VerticalResolution) != 96F || Math.Round(image.HorizontalResolution) != 96F)
-                    image = new Bitmap(image);
-
-                images.Add(file, image);
+                images.Add(file, bitmap);
             }
 
             return images;

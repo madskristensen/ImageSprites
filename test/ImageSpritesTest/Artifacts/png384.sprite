@@ -1,0 +1,11 @@
+{
+  "images": [
+    "images/384dpi/a.png",
+    "images/384dpi/b.png",
+    "images/384dpi/c.png",
+    "images/384dpi/d.png",
+    "images/384dpi/e.png",
+    "images/384dpi/f.png"
+  ],
+  "dpi": 384
+}
