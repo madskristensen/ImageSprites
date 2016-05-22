@@ -1,7 +1,7 @@
 # Roadmap
 
+- [x] Document how to use the LESS/Sass/Css files
 - [ ] Command to update all sprites in solution
-- [ ] Document how to use the LESS/Sass/Css files
 
 Features that have a checkmark are complete and available for
 download in the

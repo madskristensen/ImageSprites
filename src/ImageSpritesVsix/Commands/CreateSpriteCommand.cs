@@ -68,7 +68,7 @@ namespace ImageSpritesVsix
             using (var dialog = new SaveFileDialog())
             {
                 dialog.InitialDirectory = initialDirectory;
-                dialog.FileName = "myfile" + Constants.FileExtension;
+                dialog.FileName = "mysprite" + Constants.FileExtension;
                 dialog.DefaultExt = Constants.FileExtension;
                 dialog.Filter = "Sprite files | *" + Constants.FileExtension;
 
