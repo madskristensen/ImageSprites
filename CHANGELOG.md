@@ -3,6 +3,7 @@
 - [ ] Command to update all sprites in solution
 - [ ] Call Web Compiler to recompile when sprite updated
 
+
 Features that have a checkmark are complete and available for
 download in the
 [CI build](http://vsixgallery.com/extension/cd92c0c6-2c32-49a3-83ca-0dc767c7d78e/).
