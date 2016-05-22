@@ -1,6 +1,7 @@
 # Roadmap
 
 - [ ] Command to update all sprites in solution
+- [ ] Call Web Compiler to recompile when sprite updated
 
 Features that have a checkmark are complete and available for
 download in the
