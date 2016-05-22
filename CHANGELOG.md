@@ -1,6 +1,5 @@
 # Roadmap
 
-- [x] Document how to use the LESS/Sass/Css files
 - [ ] Command to update all sprites in solution
 
 Features that have a checkmark are complete and available for
@@ -28,3 +27,4 @@ on the official Visual Studio extension gallery.
 - [x] Screenshots and updated readme.md
 - [x] Correct defaults based on input images
 - [x] Configurable DPI settings
+- [x] Document how to use the LESS/Sass/Css files

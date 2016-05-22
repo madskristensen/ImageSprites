@@ -29,6 +29,8 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Produce LESS, Sass or CSS file with sprite image locations
 - [Image Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3) integration
 - Configurable DPI for high resolution images
+- Works with both [Web Compiler](https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c)
+and [Bundler & Minifier](https://visualstudiogallery.msdn.microsoft.com/9ec27da7-e24b-4d56-8064-fd7e88ac1c40)
 
 ### Create image sprite
 Select the images in Solution Explorer and click
