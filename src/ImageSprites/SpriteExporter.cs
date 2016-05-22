@@ -18,16 +18,38 @@ namespace ImageSprites
                 string outputFile = Path.ChangeExtension(doc.FileName, "." + format.ToString().ToLowerInvariant());
                 var outputDirectory = Path.GetDirectoryName(outputFile);
                 var bgUrl = MakeRelative(outputFile, Path.ChangeExtension(doc.FileName, doc.OutputExtension));
+                var mainClass = Path.GetFileNameWithoutExtension(doc.FileName).ToLowerInvariant().Replace(" ", "");
+
                 StringBuilder sb = new StringBuilder(GetDescription(format));
+
+                if (format == ExportFormat.Css)
+                {
+                    sb.AppendLine($".{mainClass} {{");
+                    sb.AppendLine($"\tbackground-image: url('{doc.Stylesheets.Root + bgUrl}');");
+                    sb.AppendLine($"\tbackground-repeat: no-repeat;");
+                    sb.AppendLine($"\tdisplay: block;");
+                    sb.AppendLine("}");
+                }
 
                 foreach (SpriteFragment fragment in fragments)
                 {
-                    sb.AppendLine(GetSelector(fragment.FileName, format) + " {");
-                    sb.AppendLine("/* You may have to set 'display: block' */");
-                    sb.AppendLine($"\twidth: {fragment.Width}px;");
-                    sb.AppendLine($"\theight: {fragment.Height}px;");
-                    sb.AppendLine($"\tbackground: url('{doc.Stylesheets.Root + bgUrl}') -{fragment.X}px -{fragment.Y}px;");
-                    sb.AppendLine("}");
+                    if (format == ExportFormat.Css)
+                    {
+                        sb.AppendLine($"{GetSelector(fragment.FileName, mainClass, format)} {{");
+                        sb.AppendLine($"\twidth: {fragment.Width}px;");
+                        sb.AppendLine($"\theight: {fragment.Height}px;");
+                        sb.AppendLine($"\tbackground-position: -{fragment.X}px -{fragment.Y}px;");
+                        sb.AppendLine("}");
+                    }
+                    else
+                    {
+                        sb.AppendLine(GetSelector(fragment.FileName, mainClass, format) + " {");
+                        sb.AppendLine($"\twidth: {fragment.Width}px;");
+                        sb.AppendLine($"\theight: {fragment.Height}px;");
+                        sb.AppendLine($"\tdisplay: block;");
+                        sb.AppendLine($"\tbackground: url('{doc.Stylesheets.Root + bgUrl}') -{fragment.X}px -{fragment.Y}px no-repeat;");
+                        sb.AppendLine("}");
+                    }
                 }
 
                 if (File.Exists(outputFile) && File.ReadAllText(outputFile) == sb.ToString())
@@ -62,16 +84,16 @@ namespace ImageSprites
             return "/*" + Environment.NewLine + text + Environment.NewLine + "*/" + Environment.NewLine;
         }
 
-        private static string GetSelector(string fileName, ExportFormat format)
+        private static string GetSelector(string fileName, string mainClass, ExportFormat format)
         {
-            string className = Path.GetFileNameWithoutExtension(fileName);
+            string className = Path.GetFileNameWithoutExtension(fileName).ToLowerInvariant().Replace(" ", "");
 
             if (format == ExportFormat.Less)
-                return ".sprite-" + className + "()";
+                return $".{mainClass}-{className}()";
             else if (format == ExportFormat.Scss)
-                return "@mixin sprite-" + className + "()";
+                return $"@mixin {mainClass}-{className}()";
 
-            return "." + className;
+            return $".{mainClass}.{className}";
         }
     }
 }

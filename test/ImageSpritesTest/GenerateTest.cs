@@ -40,7 +40,7 @@ namespace ImageSpritesTest
                 }
 
                 string less = File.ReadAllText(lessFile);
-                Assert.IsTrue(less.Contains(".sprite-a()"), "Sprite \"a.png\" not generated");
+                Assert.IsTrue(less.Contains(".png96-a()"), "Sprite \"a.png\" not generated");
                 Assert.IsTrue(less.Contains("url('png96.jpg')"), "Incorrect url value");
             }
             finally
