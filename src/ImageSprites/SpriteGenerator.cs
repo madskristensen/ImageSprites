@@ -13,8 +13,8 @@ namespace ImageSprites
         {
             Dictionary<string, Image> images = GetImages(doc);
 
-            int width = doc.Direction == SpriteDirection.Vertical ? images.Values.Max(i => i.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Width) + (doc.Padding * images.Count) + doc.Padding;
-            int height = doc.Direction == SpriteDirection.Vertical ? images.Values.Sum(img => img.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Height) + (doc.Padding * 2);
+            int width = doc.Direction == Direction.Vertical ? images.Values.Max(i => i.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Width) + (doc.Padding * images.Count) + doc.Padding;
+            int height = doc.Direction == Direction.Vertical ? images.Values.Sum(img => img.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Height) + (doc.Padding * 2);
 
             List<SpriteFragment> fragments = new List<SpriteFragment>();
 
@@ -22,7 +22,7 @@ namespace ImageSprites
             {
                 using (Graphics canvas = Graphics.FromImage(bitmap))
                 {
-                    if (doc.Direction == SpriteDirection.Vertical)
+                    if (doc.Direction == Direction.Vertical)
                         Vertical(images, fragments, canvas, doc.Padding);
                     else
                         Horizontal(images, fragments, canvas, doc.Padding);
@@ -35,7 +35,7 @@ namespace ImageSprites
                 OnSaved(outputFile, doc);
             }
 
-            await SpriteExporter.ExportStylesheet(fragments, doc);
+            await SpriteExporter.ExportStylesheet(fragments, doc, this);
         }
 
         private static void Vertical(Dictionary<string, Image> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
@@ -90,12 +90,12 @@ namespace ImageSprites
             return images;
         }
 
-        private void OnSaving(string fileName, SpriteDocument doc)
+        internal void OnSaving(string fileName, SpriteDocument doc)
         {
             Saving?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
         }
 
-        private void OnSaved(string fileName, SpriteDocument doc)
+        internal void OnSaved(string fileName, SpriteDocument doc)
         {
             Saved?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
         }

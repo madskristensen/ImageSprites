@@ -45,16 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExportFormat.cs" />
+    <Compile Include="Enums\ExportFormat.cs" />
     <Compile Include="Helpers\ImageHelpers.cs" />
-    <Compile Include="ImageType.cs" />
-    <Compile Include="SpriteDirection.cs" />
+    <Compile Include="Enums\ImageType.cs" />
+    <Compile Include="Enums\Optimizations.cs" />
+    <Compile Include="Enums\Direction.cs" />
     <Compile Include="SpriteDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteExporter.cs" />
     <Compile Include="SpriteFragment.cs" />
     <Compile Include="SpriteGenerator.cs" />
     <Compile Include="SpriteImageGeneratedEventArgs.cs" />
+    <Compile Include="Stylesheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

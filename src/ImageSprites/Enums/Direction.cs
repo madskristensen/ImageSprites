@@ -1,6 +1,6 @@
 namespace ImageSprites
 {
-    public enum SpriteDirection
+    public enum Direction
     {
         Vertical,
         Horizontal

@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "description": "Schema for .sprite files",
+
+  "type": "object",
+  "required": [ "images" ],
+
+  "properties": {
+    "direction": {
+      "description": "Optional. The direction of the individual images inside the generated sprite.",
+      "enum": [ "horizontal", "vertical" ],
+      "default": "vertical"
+    },
+    "format": {
+      "description": "Optional. Output format of the generated image sprite.",
+      "enum": [ "png", "jpg", "gif" ],
+      "default": "png"
+    },
+    "images": {
+      "description": "An array of file paths relative to this document.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "sprite_relativepath"
+      }
+    },
+    "optimize": {
+      "description": "Optional. Optimizes the generated image either lossy or lossless. Requires the \"Image Optimizer\" extension for Visual Studio",
+      "enum": [ "lossless", "lossy", "none" ],
+      "default": "lossless"
+    },
+    "padding": {
+      "description": "Optional. The padding arround each individual image in the sprite. The value is in pixels.",
+      "type": "integer",
+      "default": 10
+    },
+    "stylesheets": {
+      "description": "Optional. Define stylesheets (css, less, sass) to be generated as part of the sprite generation process.",
+      "type": "object",
+      "required": [ "formats" ],
+      "properties": {
+        "formats": {
+          "description": "Specifies which stylesheet types to generate.",
+          "type": "array",
+          "default": [ "less" ],
+          "uniqueItems": true,
+          "items": {
+            "enum": [ "css", "less", "scss" ]
+          }
+        },
+        "root": {
+          "description": "Optional. Add any path root in front of the generated. Example: \"/images/\"",
+          "type": "string",
+          "default": null
+        }
+      }
+    }
+  }
+}

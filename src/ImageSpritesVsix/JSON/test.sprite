@@ -1,0 +1,10 @@
+{
+  "images": [ "ss" ],
+  "direction": "horizontal",
+  "padding": 20,
+  "format": "png",
+  "stylesheets": {
+    "root": "",
+    "formats": [ "less" ]
+  }
+}

@@ -28,6 +28,13 @@ namespace ImageSpritesVsix
             info.IsReadOnly = false;
         }
 
+        internal static void ExecuteCommand(string name)
+        {
+            var command = DTE.Commands.Item(name);
+            if (command.IsAvailable)
+                DTE.ExecuteCommand(name);
+        }
+
         public static IEnumerable<ProjectItem> GetSelectedItems()
         {
             var items = (Array)DTE.ToolWindows.SolutionExplorer.SelectedItems;
@@ -208,13 +215,69 @@ namespace ImageSpritesVsix
 
             return null;
         }
-    }
 
-    public static class ProjectTypes
-    {
-        public const string ASPNET_5 = "{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}";
-        public const string WEBSITE_PROJECT = "{E24C65DC-7377-472B-9ABA-BC803B73C61A}";
-        public const string UNIVERSAL_APP = "{262852C6-CD72-467D-83FE-5EEB1973A190}";
-        public const string NODE_JS = "{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}";
+        public static void SelectInSolutionExplorer(string selected)
+        {
+            UIHierarchy solutionExplorer = (UIHierarchy)DTE.Windows.Item(EnvDTE.Constants.vsext_wk_SProjectWindow).Object;
+            UIHierarchyItem rootNode = solutionExplorer.UIHierarchyItems.Item(1);
+
+            Stack<Tuple<UIHierarchyItems, int, bool>> parents = new Stack<Tuple<UIHierarchyItems, int, bool>>();
+            ProjectItem targetItem = DTE.Solution.FindProjectItem(selected);
+
+            if (targetItem == null)
+            {
+                return;
+            }
+
+            UIHierarchyItems collection = rootNode.UIHierarchyItems;
+            int cursor = 1;
+            bool oldExpand = collection.Expanded;
+
+            while (cursor <= collection.Count || parents.Count > 0)
+            {
+                while (cursor > collection.Count && parents.Count > 0)
+                {
+                    collection.Expanded = oldExpand;
+                    Tuple<UIHierarchyItems, int, bool> parent = parents.Pop();
+                    collection = parent.Item1;
+                    cursor = parent.Item2;
+                    oldExpand = parent.Item3;
+                }
+
+                if (cursor > collection.Count)
+                {
+                    break;
+                }
+
+                UIHierarchyItem result = collection.Item(cursor);
+                ProjectItem item = result.Object as ProjectItem;
+
+                if (item == targetItem)
+                {
+                    result.Select(vsUISelectionType.vsUISelectionTypeSelect);
+                    return;
+                }
+
+                ++cursor;
+
+                bool oldOldExpand = oldExpand;
+                oldExpand = result.UIHierarchyItems.Expanded;
+                result.UIHierarchyItems.Expanded = true;
+                if (result.UIHierarchyItems.Count > 0)
+                {
+                    parents.Push(Tuple.Create(collection, cursor, oldOldExpand));
+                    collection = result.UIHierarchyItems;
+                    cursor = 1;
+                }
+            }
+        }
+
+        public static class ProjectTypes
+        {
+            public const string ASPNET_5 = "{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}";
+            public const string WEBSITE_PROJECT = "{E24C65DC-7377-472B-9ABA-BC803B73C61A}";
+            public const string UNIVERSAL_APP = "{262852C6-CD72-467D-83FE-5EEB1973A190}";
+            public const string NODE_JS = "{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}";
+        }
     }
 }

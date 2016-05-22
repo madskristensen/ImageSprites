@@ -28,7 +28,10 @@ namespace ImageSprites
         public IEnumerable<string> Images { get; set; }
 
         [JsonProperty("direction")]
-        public SpriteDirection Direction { get; set; } = SpriteDirection.Vertical;
+        public Direction Direction { get; set; } = Direction.Vertical;
+
+        [JsonProperty("optimize")]
+        public Optimizations Optimize { get; set; } = Optimizations.Lossless;
 
         [JsonProperty("padding")]
         public int Padding { get; set; } = 10;
@@ -36,8 +39,8 @@ namespace ImageSprites
         [JsonProperty("format")]
         public ImageType Format { get; set; } = ImageType.Png;
 
-        [JsonProperty("exports")]
-        public IEnumerable<ExportFormat> Exports { get; set; } = new[] { ExportFormat.Less };
+        [JsonProperty("stylesheets")]
+        public Stylesheet Stylesheets { get; set; }
 
         [JsonIgnore]
         public string OutputExtension
@@ -87,7 +90,7 @@ namespace ImageSprites
             }
         }
 
-        internal static void OnSaving(string fileName)
+        internal void OnSaving(string fileName)
         {
             if (Saving != null)
             {
@@ -95,11 +98,11 @@ namespace ImageSprites
                 var dir = Path.GetDirectoryName(fileName);
                 var name = Path.GetFileName(fileName);
 
-                Saving(null, new FileSystemEventArgs(type, dir, name));
+                Saving(this, new FileSystemEventArgs(type, dir, name));
             }
         }
 
-        internal static void OnSaved(string fileName)
+        internal void OnSaved(string fileName)
         {
             if (Saved != null)
             {
@@ -107,7 +110,7 @@ namespace ImageSprites
                 var dir = Path.GetDirectoryName(fileName);
                 var name = Path.GetFileName(fileName);
 
-                Saved(null, new FileSystemEventArgs(type, dir, name));
+                Saved(this, new FileSystemEventArgs(type, dir, name));
             }
         }
 

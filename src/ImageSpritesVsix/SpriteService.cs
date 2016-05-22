@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ImageSprites;
 
@@ -25,6 +23,18 @@ namespace ImageSpritesVsix
         private static void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
         {
             ProjectHelpers.AddNestedFile(e.Document.FileName, e.FileName);
+            string ext = Path.GetExtension(e.FileName);
+
+            if (e.Document.Optimize != Optimizations.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+            {
+                ProjectHelpers.SelectInSolutionExplorer(e.FileName);
+                string cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossless";
+
+                if (e.Document.Optimize == Optimizations.Lossy)
+                    cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossy";
+
+                ProjectHelpers.ExecuteCommand(cmd);
+            }
         }
 
         private static void SpriteImageSaving(object sender, SpriteImageGenerationEventArgs e)

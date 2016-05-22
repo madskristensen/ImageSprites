@@ -8,9 +8,12 @@ namespace ImageSprites
 {
     internal class SpriteExporter
     {
-        public async static Task ExportStylesheet(IEnumerable<SpriteFragment> fragments, SpriteDocument doc)
+        public async static Task ExportStylesheet(IEnumerable<SpriteFragment> fragments, SpriteDocument doc, SpriteGenerator generator)
         {
-            foreach (var format in doc.Exports)
+            if (doc?.Stylesheets == null)
+                return;
+
+            foreach (var format in doc.Stylesheets.Formats)
             {
                 string outputFile = Path.ChangeExtension(doc.FileName, "." + format.ToString().ToLowerInvariant());
                 var outputDirectory = Path.GetDirectoryName(outputFile);
@@ -21,9 +24,9 @@ namespace ImageSprites
                 {
                     sb.AppendLine(GetSelector(fragment.FileName, format) + " {");
                     sb.AppendLine("/* You may have to set 'display: block' */");
-                    sb.AppendLine("\twidth: " + fragment.Width + "px;");
-                    sb.AppendLine("\theight: " + fragment.Height + "px;");
-                    sb.AppendLine("\tbackground: url('" + bgUrl + "') -" + fragment.X + "px -" + fragment.Y + "px;");
+                    sb.AppendLine($"\twidth: {fragment.Width}px;");
+                    sb.AppendLine($"\theight: {fragment.Height}px;");
+                    sb.AppendLine($"\tbackground: url('{doc.Stylesheets.Root + bgUrl}') -{fragment.X}px -{fragment.Y}px;");
                     sb.AppendLine("}");
                 }
 
@@ -34,7 +37,9 @@ namespace ImageSprites
 
                 using (var writer = new StreamWriter(outputFile))
                 {
+                    generator.OnSaving(outputFile, doc);
                     await writer.WriteAsync(sb.ToString().Replace("-0px", "0"));
+                    generator.OnSaved(outputFile, doc);
                 }
             }
         }
