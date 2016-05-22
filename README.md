@@ -28,6 +28,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Configure vertical or horizontal sprite layouts
 - Produce LESS, Sass or CSS file with sprite image locations
 - [Image Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3) integration
+- Configurable DPI for high resolution images
 
 ### Create image sprite
 Select the images in Solution Explorer and click

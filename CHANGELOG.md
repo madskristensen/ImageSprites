@@ -1,7 +1,5 @@
 # Roadmap
 
-- [x] Better defaults based on input images
-- [x] Configurable DPI settings
 - [ ] Command to update all sprites in solution
 
 Features that have a checkmark are complete and available for
@@ -27,3 +25,5 @@ on the official Visual Studio extension gallery.
 - [x] .sprite parse error handling
 - [x] Input file not found error handling
 - [x] Screenshots and updated readme.md
+- [x] Correct defaults based on input images
+- [x] Configurable DPI settings
