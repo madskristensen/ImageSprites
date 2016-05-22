@@ -6,8 +6,12 @@
 - [x] Generate LESS/Sass/Css file
 - [x] Add JSON schema
 - [x] Image Optimizer integration
+- [x] File nesting
 - [x] .sprite parse error handling
 - [x] Input file not found error handling
+- [x] Screenshots and updated readme.md
+- [ ] Configurable DPI settings
+- [ ] Command to update all sprites in solution
 
 Features that have a checkmark are complete and available for
 download in the

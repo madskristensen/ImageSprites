@@ -4,10 +4,12 @@
         <Identity Id="cd92c0c6-2c32-49a3-83ca-0dc767c7d78e" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>Image Sprites</DisplayName>
         <Description xml:space="preserve">Boost your website's performance by creating image sprites to reduce the amount of HTTP requests needed.</Description>
+        <MoreInfo>https://github.com/madskristensen/ImageSprites</MoreInfo>
         <License>Resources\LICENSE</License>
+        <ReleaseNotes>https://github.com/madskristensen/ImageSprites/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Preview.png</PreviewImage>
-        <Tags>image, sprite, jpg, gif, png</Tags>
+        <Tags>image, sprite, jpg, gif, png, css, stylesheet</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
