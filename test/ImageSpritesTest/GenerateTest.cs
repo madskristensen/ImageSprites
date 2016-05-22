@@ -28,7 +28,7 @@ namespace ImageSpritesTest
             try
             {
                 var doc = await SpriteDocument.FromFile(fileName);
-                var fragments = SpriteGenerator.Generate(doc);
+                var fragments = new SpriteGenerator().Generate(doc);
 
                 using (var image = Image.FromFile(outFile))
                 {

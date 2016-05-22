@@ -1,5 +1,5 @@
 [$RootKey$\ShellFileAssociations\.sprite]
-"DefaultIconMoniker"="KnownMonikers.PerformanceGroup"
+"DefaultIconMoniker"="KnownMonikers.BuildQueue"
 
 // Website project file nesting
 [$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite]
@@ -7,3 +7,6 @@
 [$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.png]
 [$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.gif]
 [$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.jpg]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.less]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.scss]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.sprite\.css]

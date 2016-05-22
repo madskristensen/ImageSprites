@@ -36,6 +36,9 @@ namespace ImageSprites
         [JsonProperty("format")]
         public ImageType Format { get; set; } = ImageType.Png;
 
+        [JsonProperty("exports")]
+        public IEnumerable<ExportFormat> Exports { get; set; } = new[] { ExportFormat.Less };
+
         [JsonIgnore]
         public string OutputExtension
         {
@@ -84,7 +87,7 @@ namespace ImageSprites
             }
         }
 
-        private static void OnSaving(string fileName)
+        internal static void OnSaving(string fileName)
         {
             if (Saving != null)
             {
@@ -96,7 +99,7 @@ namespace ImageSprites
             }
         }
 
-        private static void OnSaved(string fileName)
+        internal static void OnSaved(string fileName)
         {
             if (Saved != null)
             {

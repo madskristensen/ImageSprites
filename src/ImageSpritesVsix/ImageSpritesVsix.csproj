@@ -62,7 +62,6 @@
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Compile>
     <Compile Include="SpriteService.cs" />
-    <Compile Include="Sprite\SpriteExporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\LICENSE">

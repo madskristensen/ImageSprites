@@ -10,13 +10,16 @@ namespace ImageSpritesVsix
 {
     class SpriteService
     {
+        private static SpriteGenerator _generator;
+
         public static void Initialize()
         {
             SpriteDocument.Saving += SpriteSaving;
             SpriteDocument.Saved += SpriteSaved;
 
-            SpriteGenerator.Saving += SpriteImageSaving;
-            SpriteGenerator.Saved += SpriteImageSaved;
+            _generator = new SpriteGenerator();
+            _generator.Saving += SpriteImageSaving;
+            _generator.Saved += SpriteImageSaved;
         }
 
         private static void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
@@ -50,15 +53,12 @@ namespace ImageSpritesVsix
         public static async Task GenerateSprite(string fileName)
         {
             var doc = await SpriteDocument.FromFile(fileName);
-            var fragments = SpriteGenerator.Generate(doc);
+            await GenerateSprite(doc);
         }
 
         public static async Task GenerateSprite(SpriteDocument doc)
         {
-            await Task.Run(() =>
-            {
-                var fragments = SpriteGenerator.Generate(doc);
-            });
+            await _generator.Generate(doc);
         }
     }
 }

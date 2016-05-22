@@ -13,7 +13,7 @@
         <Buttons>
             <Button guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0100" type="Button">
                 <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
-                <Icon guid="ImageCatalogGuid" id="PerformanceGroup" />
+                <Icon guid="ImageCatalogGuid" id="BuildQueue" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <CommandFlag>DefaultDisabled</CommandFlag>
@@ -25,7 +25,7 @@
 
             <Button guid="guidImageSpriteCmdSet" id="UpdateSprite" priority="0x0100" type="Button">
                 <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
-                <Icon guid="ImageCatalogGuid" id="PerformanceGroup" />
+                <Icon guid="ImageCatalogGuid" id="BuildQueue" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <CommandFlag>DefaultDisabled</CommandFlag>

@@ -1,7 +1,7 @@
 ﻿
 namespace ImageSprites
 {
-    public class SpriteFragment
+    internal class SpriteFragment
     {
         public SpriteFragment(string fileName, int width, int height, int x, int y)
         {

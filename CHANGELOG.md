@@ -3,7 +3,7 @@
 - [x] Sprite image generation
 - [x] Command for creating .sprite files
 - [x] Command for updating sprites
-- [ ] Generate LESS/Sass/Css file
+- [x] Generate LESS/Sass/Css file
 
 Features that have a checkmark are complete and available for
 download in the

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ImageSprites
 {
-    public static class SpriteGenerator
+    public class SpriteGenerator
     {
-        public static IEnumerable<SpriteFragment> Generate(SpriteDocument doc)
+        public async Task Generate(SpriteDocument doc)
         {
             Dictionary<string, Image> images = GetImages(doc);
 
@@ -34,7 +35,7 @@ namespace ImageSprites
                 OnSaved(outputFile, doc);
             }
 
-            return fragments;
+            await SpriteExporter.ExportStylesheet(fragments, doc);
         }
 
         private static void Vertical(Dictionary<string, Image> images, List<SpriteFragment> fragments, Graphics canvas, int margin)
@@ -89,17 +90,17 @@ namespace ImageSprites
             return images;
         }
 
-        private static void OnSaving(string fileName, SpriteDocument doc)
+        private void OnSaving(string fileName, SpriteDocument doc)
         {
             Saving?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
         }
 
-        private static void OnSaved(string fileName, SpriteDocument doc)
+        private void OnSaved(string fileName, SpriteDocument doc)
         {
             Saved?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
         }
 
-        public static event SpriteImageGenerationEventHandler Saving;
-        public static event SpriteImageGenerationEventHandler Saved;
+        public event SpriteImageGenerationEventHandler Saving;
+        public event SpriteImageGenerationEventHandler Saved;
     }
 }
