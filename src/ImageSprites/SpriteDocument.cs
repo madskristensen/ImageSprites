@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -53,14 +54,21 @@ namespace ImageSprites
 
         public static async Task<SpriteDocument> FromFile(string fileName)
         {
-            using (var reader = new StreamReader(fileName))
+            try
             {
-                var content = await reader.ReadToEndAsync().ConfigureAwait(false);
-                var doc = JsonConvert.DeserializeObject<SpriteDocument>(content);
+                using (var reader = new StreamReader(fileName))
+                {
+                    var content = await reader.ReadToEndAsync().ConfigureAwait(false);
+                    var doc = JsonConvert.DeserializeObject<SpriteDocument>(content);
 
-                doc.FileName = fileName;
+                    doc.FileName = fileName;
 
-                return doc;
+                    return doc;
+                }
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new SpriteParseException(fileName, ex);
             }
         }
 

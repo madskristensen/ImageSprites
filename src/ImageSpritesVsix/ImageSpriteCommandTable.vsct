@@ -13,7 +13,7 @@
         <Buttons>
             <Button guid="guidImageSpriteCmdSet" id="CreateSprite" priority="0x0100" type="Button">
                 <Parent guid="guidImageSpriteCmdSet" id="MenuGroup" />
-                <Icon guid="ImageCatalogGuid" id="BuildQueue" />
+                <Icon guid="ImageCatalogGuid" id="AddBuildToQueue" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <CommandFlag>DefaultDisabled</CommandFlag>

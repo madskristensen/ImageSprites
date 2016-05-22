@@ -56,6 +56,7 @@
     <Compile Include="SpriteFragment.cs" />
     <Compile Include="SpriteGenerator.cs" />
     <Compile Include="SpriteImageGeneratedEventArgs.cs" />
+    <Compile Include="SpriteParseException.cs" />
     <Compile Include="Stylesheet.cs" />
   </ItemGroup>
   <ItemGroup>

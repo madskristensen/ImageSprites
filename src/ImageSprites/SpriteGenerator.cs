@@ -74,7 +74,7 @@ namespace ImageSprites
             {
                 if (!File.Exists(file))
                 {
-                    return null;
+                    throw new FileNotFoundException("One or more sprite input files don't exist", file);
                 }
 
                 Image image = Image.FromFile(file);

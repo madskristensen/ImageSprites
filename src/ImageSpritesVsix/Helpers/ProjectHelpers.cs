@@ -14,7 +14,7 @@ namespace ImageSpritesVsix
             DTE = (DTE2)Package.GetGlobalService(typeof(DTE));
         }
 
-        private static DTE2 DTE { get; }
+        public static DTE2 DTE { get; }
 
         public static void CheckFileOutOfSourceControl(string file)
         {

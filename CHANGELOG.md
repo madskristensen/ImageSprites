@@ -6,7 +6,8 @@
 - [x] Generate LESS/Sass/Css file
 - [x] Add JSON schema
 - [x] Image Optimizer integration
-- [ ] .sprite parse error handling
+- [x] .sprite parse error handling
+- [x] Input file not found error handling
 
 Features that have a checkmark are complete and available for
 download in the

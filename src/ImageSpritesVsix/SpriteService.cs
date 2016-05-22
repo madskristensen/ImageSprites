@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ImageSprites;
 
 namespace ImageSpritesVsix
@@ -23,17 +24,29 @@ namespace ImageSpritesVsix
         private static void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
         {
             ProjectHelpers.AddNestedFile(e.Document.FileName, e.FileName);
-            string ext = Path.GetExtension(e.FileName);
+            OptimizeImage(e.FileName, e.Document.Optimize);
+        }
 
-            if (e.Document.Optimize != Optimizations.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+        private static void OptimizeImage(string fileName, Optimizations optimization)
+        {
+            try
             {
-                ProjectHelpers.SelectInSolutionExplorer(e.FileName);
-                string cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossless";
+                string ext = Path.GetExtension(fileName);
 
-                if (e.Document.Optimize == Optimizations.Lossy)
-                    cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossy";
+                if (optimization != Optimizations.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+                {
+                    ProjectHelpers.SelectInSolutionExplorer(fileName);
+                    string cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossless";
 
-                ProjectHelpers.ExecuteCommand(cmd);
+                    if (optimization == Optimizations.Lossy)
+                        cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossy";
+
+                    ProjectHelpers.ExecuteCommand(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
             }
         }
 
@@ -62,13 +75,37 @@ namespace ImageSpritesVsix
 
         public static async Task GenerateSprite(string fileName)
         {
-            var doc = await SpriteDocument.FromFile(fileName);
-            await GenerateSprite(doc);
+            try
+            {
+                var doc = await SpriteDocument.FromFile(fileName);
+                await GenerateSprite(doc);
+            }
+            catch (SpriteParseException ex)
+            {
+                MessageBox.Show(ex.Message, Vsix.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ProjectHelpers.DTE.ItemOperations.OpenFile(fileName);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+            }
         }
 
         public static async Task GenerateSprite(SpriteDocument doc)
         {
-            await _generator.Generate(doc);
+            try
+            {
+                await _generator.Generate(doc);
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, Vsix.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+            }
         }
     }
 }
