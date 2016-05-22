@@ -1,15 +1,5 @@
 # Roadmap
 
-- [x] Sprite image generation
-- [x] Command for creating .sprite files
-- [x] Command for updating sprites
-- [x] Generate LESS/Sass/Css file
-- [x] Add JSON schema
-- [x] Image Optimizer integration
-- [x] File nesting
-- [x] .sprite parse error handling
-- [x] Input file not found error handling
-- [x] Screenshots and updated readme.md
 - [ ] Configurable DPI settings
 - [ ] Command to update all sprites in solution
 
@@ -24,6 +14,15 @@ on the official Visual Studio extension gallery.
 
 ## 1.0
 
-**2016-05-20**
+**2016-05-22**
 
-- [x] Initial release
+- [x] Sprite image generation
+- [x] Command for creating .sprite files
+- [x] Command for updating sprites
+- [x] Generate LESS/Sass/Css file
+- [x] Add JSON schema
+- [x] Image Optimizer integration
+- [x] File nesting
+- [x] .sprite parse error handling
+- [x] Input file not found error handling
+- [x] Screenshots and updated readme.md

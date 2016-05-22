@@ -61,27 +61,27 @@ is stored. It looks like this:
 }
 ```
 
-`images` is an array of relative file paths to the image
+**images** is an array of relative file paths to the image
 files that make up the resulting sprite file. The order
 of the images are maintained in the generated sprite image.
 
-`direction` determines if the images are layed out either
+**direction** determines if the images are layed out either
 horizontally or vertically. 
 
-`padding` is the distance of whitespace inserted around each
+**padding** is the distance of whitespace inserted around each
 individual image in the sprite. The value is in pixels.
 
-`optimize` controls how the generated image sprite should be
-optimized. Choose from `lossless`, `lossy` or `none`. This
+**optimize** controls how the generated image sprite should be
+optimized. Choose from *lossless*, *lossy* or *none*. This
 feature requires the
 [Images Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3)
 to be installed. 
 
-`stylesheets` outputs LESS, Sass or plain CSS files to make
+**stylesheets** outputs LESS, Sass or plain CSS files to make
 it easy to use the image sprite in any web project.
 
-Set the `root` property to anything to prefix the path to
-the image file in the `url(path)` value.
+Set the **root** property to anything to prefix the path to
+the image file in the *url(path)* value.
 
 ### Update image sprite
 Every time the .sprite file is modified and saved, the image
