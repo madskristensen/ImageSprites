@@ -8,6 +8,9 @@
     "images/96dpi/f.png"
   ],
   "direction": "horizontal",
-  "padding": "20",
-  "format": "jpg"
+  "padding": 20,
+  "format": "jpg",
+  "stylesheets": {
+    "formats": [ "less" ]
+  }
 }
