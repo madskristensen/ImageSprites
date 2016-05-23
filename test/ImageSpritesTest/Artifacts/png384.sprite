@@ -7,5 +7,6 @@
     "e": "images/384dpi/e.png",
     "f": "images/384dpi/f.png"
   },
-  "dpi": 384
+  "dpi": 384,
+  "stylesheet": "css"
 }

@@ -51,10 +51,13 @@
 
     <CommandPlacements>
         <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+        </CommandPlacement>
+        <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
             <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
         </CommandPlacement>
         <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
-            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
         </CommandPlacement>
         <CommandPlacement guid="guidImageSpriteCmdSet" id="MenuGroup" priority="0x0200">
             <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>

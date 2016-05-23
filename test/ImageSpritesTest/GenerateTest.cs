@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using ImageSprites;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,6 +19,14 @@ namespace ImageSpritesTest
         {
             _artifacts = new DirectoryInfo(@"..\..\Artifacts").FullName;
             _generator = new SpriteGenerator();
+            _generator.Saving += SavingEventHandler;
+            _generator.Saved += SavingEventHandler;
+        }
+
+        private void SavingEventHandler(object sender, SpriteImageGenerationEventArgs e)
+        {
+            Assert.IsTrue(e.Document.Images.Any());
+            Assert.IsTrue(e.FileName.StartsWith(e.Document.FileName));
         }
 
         [TestMethod]
@@ -55,6 +63,7 @@ namespace ImageSpritesTest
         {
             var fileName = Path.Combine(_artifacts, "png384.sprite");
             var imgFile = fileName + ".png";
+            var cssFile = fileName + ".css";
 
             try
             {
@@ -67,10 +76,15 @@ namespace ImageSpritesTest
                     Assert.AreEqual(166, image.Height); // 16 + padding
                     Assert.AreEqual(36, image.Width); // 16 * 6 + padding
                 }
+
+                string css = File.ReadAllText(cssFile);
+                Assert.IsTrue(css.Contains(".png384.a"), "Sprite \"a.png\" not generated");
+                Assert.IsTrue(css.Contains("url('png384.sprite.png')"), "Incorrect url value");
             }
             finally
             {
                 File.Delete(imgFile);
+                File.Delete(cssFile);
             }
         }
     }

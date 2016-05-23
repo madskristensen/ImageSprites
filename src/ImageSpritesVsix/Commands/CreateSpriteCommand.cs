@@ -53,8 +53,7 @@ namespace ImageSpritesVsix
 
             if (GetFileName(folder, out spriteFile))
             {
-                var doc = new SpriteDocument(spriteFile);
-                doc.AddImages(files.Select(f => SpriteHelpers.MakeRelative(spriteFile, f)));
+                var doc = new SpriteDocument(spriteFile, files);
                 doc.Stylesheet = Stylesheet.Css;
 
                 await doc.Save();

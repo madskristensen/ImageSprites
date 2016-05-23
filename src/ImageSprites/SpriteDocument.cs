@@ -18,11 +18,6 @@ namespace ImageSprites
         public SpriteDocument()
         { }
 
-        /// <summary>Creates a new instance with default values and the specified file name.</summary>
-        public SpriteDocument(string fileName)
-            : this(fileName, Enumerable.Empty<string>())
-        { }
-
         /// <summary>Creates a new instance and calculates values based in provided images.</summary>
         public SpriteDocument(string fileName, IEnumerable<string> images)
         {
@@ -43,7 +38,7 @@ namespace ImageSprites
 
         /// <summary>The individual images that makes up the sprite.</summary>
         [JsonProperty("images")]
-        public IDictionary<string, string> Images { get; set; }
+        public IDictionary<string, string> Images { get; private set; }
 
         /// <summary>The orientation of the individual images inside the sprite.</summary>
         [JsonProperty("orientation")]
@@ -135,18 +130,19 @@ namespace ImageSprites
         /// Add image files to the sprite.
         /// </summary>
         /// <param name="files">A list of relative file paths.</param>
-        public void AddImages(IEnumerable<string> files)
+        private void AddImages(IEnumerable<string> files)
         {
             var dic = new Dictionary<string, string>();
 
             foreach (var file in files)
             {
                 string name = SpriteHelpers.GetIdentifier(file);
+                string relative = SpriteHelpers.MakeRelative(FileName, file);
 
                 if (dic.ContainsKey(name))
                     name += "_" + Guid.NewGuid().ToString().Replace("-", string.Empty);
 
-                dic.Add(name, file);
+                dic.Add(name, relative);
             }
 
             Images = dic;
