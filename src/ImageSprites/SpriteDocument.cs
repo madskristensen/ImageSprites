@@ -67,17 +67,22 @@ namespace ImageSprites
 
         public static async Task<SpriteDocument> FromFile(string fileName)
         {
+            using (var reader = new StreamReader(fileName))
+            {
+                var content = await reader.ReadToEndAsync().ConfigureAwait(false);
+                var doc = FromJSON(content, fileName);
+
+                doc.FileName = fileName;
+
+                return doc;
+            }
+        }
+
+        public static SpriteDocument FromJSON(string json, string fileName = null)
+        {
             try
             {
-                using (var reader = new StreamReader(fileName))
-                {
-                    var content = await reader.ReadToEndAsync().ConfigureAwait(false);
-                    var doc = JsonConvert.DeserializeObject<SpriteDocument>(content);
-
-                    doc.FileName = fileName;
-
-                    return doc;
-                }
+                return JsonConvert.DeserializeObject<SpriteDocument>(json);
             }
             catch (JsonSerializationException ex)
             {
@@ -98,13 +103,18 @@ namespace ImageSprites
             return dic;
         }
 
-        public async Task Save()
+        public string ToJsonString()
         {
             var settings = new JsonSerializerSettings();
             settings.Formatting = Formatting.Indented;
             settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 
-            var json = JsonConvert.SerializeObject(this, settings);
+            return JsonConvert.SerializeObject(this, settings);
+        }
+
+        public async Task Save()
+        {
+            var json = ToJsonString();
 
             using (var writer = new StreamWriter(FileName))
             {

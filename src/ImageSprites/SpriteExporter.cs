@@ -19,7 +19,7 @@ namespace ImageSprites
             {
                 string outputFile = doc.FileName + "." + format.ToString().ToLowerInvariant();
                 var outputDirectory = Path.GetDirectoryName(outputFile);
-                var bgUrl = MakeRelative(outputFile, Path.ChangeExtension(doc.FileName, doc.OutputExtension));
+                var bgUrl = MakeRelative(outputFile, doc.FileName + doc.OutputExtension);
 
                 StringBuilder sb = new StringBuilder(GetDescription(format));
 

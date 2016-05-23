@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ImageSprites
 {
-    internal static class ImageHelpers
+    internal static class SHelpers
     {
         public static ImageFormat ExtensionFromFormat(ImageType format)
         {
