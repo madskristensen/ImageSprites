@@ -55,6 +55,7 @@ namespace ImageSpritesVsix
             {
                 var doc = new SpriteDocument(spriteFile);
                 doc.AddImages(files.Select(f => SpriteHelpers.MakeRelative(spriteFile, f)));
+                doc.Stylesheet = Stylesheet.Css;
 
                 await doc.Save();
                 ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);

@@ -7,8 +7,5 @@
     "e": "images/384dpi/e.png",
     "f": "images/384dpi/f.png"
   },
-  "dpi": 384,
-  "stylesheets": {
-    "formats": []
-  }
+  "dpi": 384
 }

@@ -13,18 +13,18 @@ namespace ImageSprites
         {
             var images = GetImages(doc);
 
-            int width = doc.Direction == Direction.Vertical ? images.Values.Max(i => i.Item2.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Item2.Width) + (doc.Padding * images.Count) + doc.Padding;
-            int height = doc.Direction == Direction.Vertical ? images.Values.Sum(img => img.Item2.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Item2.Height) + (doc.Padding * 2);
+            int width = doc.Orientation == Direction.Vertical ? images.Values.Max(i => i.Item2.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Item2.Width) + (doc.Padding * images.Count) + doc.Padding;
+            int height = doc.Orientation == Direction.Vertical ? images.Values.Sum(img => img.Item2.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Item2.Height) + (doc.Padding * 2);
 
             List<SpriteFragment> fragments = new List<SpriteFragment>();
 
             using (var bitmap = new Bitmap(width, height))
             {
-                bitmap.SetResolution(doc.Resolution, doc.Resolution);
+                bitmap.SetResolution(doc.Dpi, doc.Dpi);
 
                 using (Graphics canvas = Graphics.FromImage(bitmap))
                 {
-                    if (doc.Direction == Direction.Vertical)
+                    if (doc.Orientation == Direction.Vertical)
                         Vertical(images, fragments, canvas, doc.Padding);
                     else
                         Horizontal(images, fragments, canvas, doc.Padding);
@@ -33,7 +33,7 @@ namespace ImageSprites
                 string outputFile = doc.FileName + doc.OutputExtension;
 
                 OnSaving(outputFile, doc);
-                bitmap.Save(outputFile, SpriteHelpers.ExtensionFromFormat(doc.Format));
+                bitmap.Save(outputFile, SpriteHelpers.ExtensionFromFormat(doc.Output));
                 OnSaved(outputFile, doc);
             }
 
@@ -85,7 +85,7 @@ namespace ImageSprites
                 }
 
                 var bitmap = (Bitmap)Image.FromFile(file);
-                bitmap.SetResolution(doc.Resolution, doc.Resolution);
+                bitmap.SetResolution(doc.Dpi, doc.Dpi);
 
                 images.Add(ident, Tuple.Create(file, bitmap));
             }

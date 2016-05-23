@@ -1,7 +1,8 @@
 namespace ImageSprites
 {
-    public enum ExportFormat
+    public enum Stylesheet
     {
+        None,
         Css,
         Less,
         Scss

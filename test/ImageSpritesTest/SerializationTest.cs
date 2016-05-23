@@ -30,14 +30,14 @@ namespace ImageSpritesTest
         {
             var original = new SpriteDocument(_fileName);
             original.AddImages(new[] { "img/a.png", "img/b.png" });
-            original.Format = ImageType.Jpg;
+            original.Output = ImageType.Jpg;
             await original.Save();
 
             var read = await SpriteDocument.FromFile(_fileName);
 
-            Assert.AreEqual(original.Direction, read.Direction);
+            Assert.AreEqual(original.Orientation, read.Orientation);
             Assert.AreEqual(original.FileName, read.FileName);
-            Assert.AreEqual(original.Format, read.Format);
+            Assert.AreEqual(original.Output, read.Output);
             Assert.AreEqual(original.Images.Count(), read.Images.Count());
 
             var input = new FileInfo(Path.Combine(_artifacts, "img/a.png")).FullName;

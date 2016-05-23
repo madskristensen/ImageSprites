@@ -39,29 +39,27 @@ Select the images in Solution Explorer and click
 ![Context menu](art/context-menu-images.png)
 
 This will generate a **.sprite** manifest file as well as
-the resulting image file and a LESS stylesheet file.
+the resulting image file and a **.css** file.
 
 ![Sol Exp](art/sol-exp.png)
 
 ### The .sprite file
 The .sprite file is where information about the image sprite
-is stored. It looks like this:
+is stored. It looks something like this:
 
 ```json
 {
-	"images": {
-		"pic1": "a.png",
-		"pic2": "b.png"
-	},
-	"direction": "horizontal",
-	"padding": 10,
-    "dpi": 96,
-	"optimize": "lossy",
-	"format": "png",
-	"stylesheets": {
-		"root": "/webroot/img/",
-		"formats": [ "less" ]
-	}
+  "images": {
+    "pic1": "a.png",
+    "pic2": "b.png"
+  },
+  "orientation": "vertical",
+  "optimize": "lossless",
+  "padding": 10,
+  "output": "png",
+  "dpi": 384,
+  "stylesheet": "css",
+  "pathprefix": "/images/"
 }
 ```
 
@@ -85,11 +83,11 @@ feature requires the
 [Images Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3)
 to be installed. 
 
-**stylesheets** outputs LESS, Sass or plain CSS files to make
+**stylesheet** outputs LESS, Sass or plain CSS files to make
 it easy to use the image sprite in any web project.
 
-Set the **root** property to anything to prefix the path to
-the image file in the *url(path)* value.
+**pathprefix** adds a prefix string to the image path in
+the *url(path)* value in the stylesheet.
 
 ### Update image sprite
 Every time the .sprite file is modified and saved, the image

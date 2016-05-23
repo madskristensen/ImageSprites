@@ -6,20 +6,10 @@
   "required": [ "images" ],
 
   "properties": {
-    "direction": {
-      "description": "Optional. The direction of the individual images inside the generated sprite.",
-      "enum": [ "horizontal", "vertical" ],
-      "default": "vertical"
-    },
     "dpi": {
-      "description": "Optional. The image resolution of the generated image sprite",
+      "description": "The image resolution of the generated image sprite",
       "type": "integer",
       "default": 96
-    },
-    "format": {
-      "description": "Optional. Output format of the generated image sprite.",
-      "enum": [ "png", "jpg", "gif" ],
-      "default": "png"
     },
     "images": {
       "description": "An array of file paths relative to this document. The name must be unique.",
@@ -31,35 +21,34 @@
       }
     },
     "optimize": {
-      "description": "Optional. Optimizes the generated image either lossy or lossless. Requires the \"Image Optimizer\" extension for Visual Studio",
+      "description": "Optimizes the generated image either lossy or lossless. Requires the \"Image Optimizer\" extension for Visual Studio",
       "enum": [ "lossless", "lossy", "none" ],
       "default": "lossless"
     },
+    "orientation": {
+      "description": "The orientation of the individual images inside the generated sprite.",
+      "enum": [ "horizontal", "vertical" ],
+      "default": "vertical"
+    },
+    "output": {
+      "description": "Output format of the generated image sprite.",
+      "enum": [ "png", "jpg", "gif" ],
+      "default": "png"
+    },
     "padding": {
-      "description": "Optional. The padding arround each individual image in the sprite. The value is in pixels.",
+      "description": "The padding arround each individual image in the sprite. The value is in pixels.",
       "type": "integer",
       "default": 10
     },
-    "stylesheets": {
-      "description": "Optional. Define stylesheets (css, less, sass) to be generated as part of the sprite generation process.",
-      "type": "object",
-      "required": [ "formats" ],
-      "properties": {
-        "formats": {
-          "description": "Specifies which stylesheet types to generate.",
-          "type": "array",
-          "default": [ "less" ],
-          "uniqueItems": true,
-          "items": {
-            "enum": [ "css", "less", "scss" ]
-          }
-        },
-        "root": {
-          "description": "Optional. Add any path root in front of the generated. Example: \"/images/\"",
-          "type": "string",
-          "default": null
-        }
-      }
+    "pathprefix": {
+      "description": "Add any path root in front of the generated. Example: \"/images/\"",
+      "type": "string",
+      "default": ""
+    },
+    "stylesheet": {
+      "description": "Define stylesheets (css, less, sass) to be generated as part of the sprite generation process.",
+      "enum": [ "none", "css", "less", "scss" ],
+      "default": "none"
     }
   }
 }

@@ -1,0 +1,38 @@
+/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.png384 {
+	background-image: url('png384.sprite.png');
+	background-repeat: no-repeat;
+	display: block;
+}
+.png384.a {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -10px;
+}
+.png384.b {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -36px;
+}
+.png384.c {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -62px;
+}
+.png384.d {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -88px;
+}
+.png384.e {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -114px;
+}
+.png384.f {
+	width: 16px;
+	height: 16px;
+	background-position: -10px -140px;
+}

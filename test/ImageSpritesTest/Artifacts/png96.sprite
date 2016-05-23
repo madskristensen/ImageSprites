@@ -7,10 +7,8 @@
     "e": "images/96dpi/e.png",
     "f": "images/96dpi/f.png"
   },
-  "direction": "horizontal",
+  "orientation": "horizontal",
   "padding": 20,
-  "format": "jpg",
-  "stylesheets": {
-    "formats": [ "less" ]
-  }
+  "output": "jpg",
+  "stylesheet": "less"
 }

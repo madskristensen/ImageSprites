@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ExportFormat.cs" />
+    <Compile Include="Enums\StylesheetType.cs" />
     <Compile Include="Helpers\SpriteHelpers.cs" />
     <Compile Include="Enums\ImageType.cs" />
     <Compile Include="Enums\Optimizations.cs" />
@@ -57,7 +57,6 @@
     <Compile Include="SpriteGenerator.cs" />
     <Compile Include="SpriteImageGeneratedEventArgs.cs" />
     <Compile Include="SpriteParseException.cs" />
-    <Compile Include="Stylesheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

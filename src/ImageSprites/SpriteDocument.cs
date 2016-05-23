@@ -26,9 +26,8 @@ namespace ImageSprites
             if (images.Any())
             {
                 var first = Image.FromFile(images.First());
-                Resolution = (int)Math.Round(first.HorizontalResolution);
-
-                Format = SpriteHelpers.GetImageFormatFromExtension(images.First());
+                Dpi = (int)Math.Round(first.HorizontalResolution);
+                Output = SpriteHelpers.GetImageFormatFromExtension(images.First());
             }
         }
 
@@ -38,8 +37,8 @@ namespace ImageSprites
         [JsonProperty("images")]
         public IDictionary<string, string> Images { get; set; }
 
-        [JsonProperty("direction")]
-        public Direction Direction { get; set; } = Direction.Vertical;
+        [JsonProperty("orientation")]
+        public Direction Orientation { get; set; } = Direction.Vertical;
 
         [JsonProperty("optimize")]
         public Optimizations Optimize { get; set; } = Optimizations.Lossless;
@@ -47,21 +46,24 @@ namespace ImageSprites
         [JsonProperty("padding")]
         public int Padding { get; set; } = 10;
 
-        [JsonProperty("format")]
-        public ImageType Format { get; set; } = ImageType.Png;
-
-        [JsonProperty("stylesheets")]
-        public Stylesheet Stylesheets { get; set; } = new Stylesheet();
+        [JsonProperty("output")]
+        public ImageType Output { get; set; } = ImageType.Png;
 
         [JsonProperty("dpi")]
-        public int Resolution { get; set; } = 96;
+        public int Dpi { get; set; } = 96;
+
+        [JsonProperty("stylesheet")]
+        public Stylesheet Stylesheet { get; set; } = Stylesheet.None;
+
+        [JsonProperty("pathprefix")]
+        public string PathPrefix { get; set; } = string.Empty;
 
         [JsonIgnore]
         public string OutputExtension
         {
             get
             {
-                return "." + Format.ToString().ToLowerInvariant();
+                return "." + Output.ToString().ToLowerInvariant();
             }
         }
 
@@ -167,5 +169,15 @@ namespace ImageSprites
 
         public static event FileSystemEventHandler Saving;
         public static event FileSystemEventHandler Saved;
+
+        public bool ShouldSerializeDpi()
+        {
+            return Dpi != 96;
+        }
+
+        public bool ShouldSerializeStylesheet()
+        {
+            return Stylesheet != Stylesheet.None;
+        }
     }
 }
