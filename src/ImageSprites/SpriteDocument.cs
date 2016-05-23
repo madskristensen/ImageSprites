@@ -9,15 +9,21 @@ using Newtonsoft.Json.Converters;
 
 namespace ImageSprites
 {
+    /// <summary>
+    /// The sprite manifest document containing all information needed to produce the image sprite.
+    /// </summary>
     public class SpriteDocument
     {
+        /// <summary>Creates a new instance with default values.</summary>
         public SpriteDocument()
         { }
 
+        /// <summary>Creates a new instance with default values and the specified file name.</summary>
         public SpriteDocument(string fileName)
             : this(fileName, Enumerable.Empty<string>())
         { }
 
+        /// <summary>Creates a new instance and calculates values based in provided images.</summary>
         public SpriteDocument(string fileName, IEnumerable<string> images)
         {
             FileName = fileName;
@@ -31,33 +37,43 @@ namespace ImageSprites
             }
         }
 
+        /// <summary>The absolute file name.</summary>
         [JsonIgnore]
-        public string FileName { get; set; }
+        public string FileName { get; private set; }
 
+        /// <summary>The individual images that makes up the sprite.</summary>
         [JsonProperty("images")]
         public IDictionary<string, string> Images { get; set; }
 
+        /// <summary>The orientation of the individual images inside the sprite.</summary>
         [JsonProperty("orientation")]
-        public Direction Orientation { get; set; } = Direction.Vertical;
+        public Orientation Orientation { get; set; } = Orientation.Vertical;
 
+        /// <summary>Image optimization settings.</summary>
         [JsonProperty("optimize")]
         public Optimizations Optimize { get; set; } = Optimizations.Lossless;
 
+        /// <summary>The padding size in pixels around each individual image in the sprite.</summary>
         [JsonProperty("padding")]
         public int Padding { get; set; } = 10;
 
+        /// <summary>The output format of the generated sprite image.</summary>
         [JsonProperty("output")]
         public ImageType Output { get; set; } = ImageType.Png;
 
+        /// <summary>The DPI of the generated sprite image.</summary>
         [JsonProperty("dpi")]
         public int Dpi { get; set; } = 96;
 
+        /// <summary>The type of stylesheet to generate.</summary>
         [JsonProperty("stylesheet")]
         public Stylesheet Stylesheet { get; set; } = Stylesheet.None;
 
+        /// <summary>The path to prepend to url in the stylesheet's "url()" function.</summary>
         [JsonProperty("pathprefix")]
         public string PathPrefix { get; set; } = string.Empty;
 
+        /// <summary>The file extension of the output sprite image.</summary>
         [JsonIgnore]
         public string OutputExtension
         {
@@ -67,6 +83,10 @@ namespace ImageSprites
             }
         }
 
+        /// <summary>
+        /// Create an instance from a .sprite file.
+        /// </summary>
+        /// <param name="fileName">A valid .sprite JSON file.</param>
         public static async Task<SpriteDocument> FromFile(string fileName)
         {
             using (var reader = new StreamReader(fileName))
@@ -80,6 +100,12 @@ namespace ImageSprites
             }
         }
 
+        /// <summary>
+        /// Creates an instance from the specified JSON string.
+        /// </summary>
+        /// <param name="json">A string of valid JSON.</param>
+        /// <param name="fileName">Optionally provide a file name for error handling purposes.</param>
+        /// <returns></returns>
         public static SpriteDocument FromJSON(string json, string fileName = null)
         {
             try
@@ -92,19 +118,10 @@ namespace ImageSprites
             }
         }
 
-        public IDictionary<string, string> ToAbsoluteImages()
-        {
-            var dir = Path.GetDirectoryName(FileName);
-            var dic = new Dictionary<string, string>();
-
-            foreach (var ident in Images.Keys)
-            {
-                dic.Add(ident, new FileInfo(Path.Combine(dir, Images[ident])).FullName);
-            }
-
-            return dic;
-        }
-
+        /// <summary>
+        /// Converts the SpriteDocument to its JSON string representation.
+        /// </summary>
+        /// <returns>A JSON string representation of SpriteDocument instance.</returns>
         public string ToJsonString()
         {
             var settings = new JsonSerializerSettings();
@@ -114,18 +131,10 @@ namespace ImageSprites
             return JsonConvert.SerializeObject(this, settings);
         }
 
-        public async Task Save()
-        {
-            var json = ToJsonString();
-
-            using (var writer = new StreamWriter(FileName))
-            {
-                OnSaving(FileName);
-                await writer.WriteAsync(json).ConfigureAwait(false);
-                OnSaved(FileName);
-            }
-        }
-
+        /// <summary>
+        /// Add image files to the sprite.
+        /// </summary>
+        /// <param name="files">A list of relative file paths.</param>
         public void AddImages(IEnumerable<string> files)
         {
             var dic = new Dictionary<string, string>();
@@ -141,6 +150,34 @@ namespace ImageSprites
             }
 
             Images = dic;
+        }
+
+        /// <summary>
+        /// Saves the SpriteDocument as a JSON file to the FileName location.
+        /// </summary>
+        public async Task Save()
+        {
+            var json = ToJsonString();
+
+            using (var writer = new StreamWriter(FileName))
+            {
+                OnSaving(FileName);
+                await writer.WriteAsync(json).ConfigureAwait(false);
+                OnSaved(FileName);
+            }
+        }
+
+        internal IDictionary<string, string> ToAbsoluteImages()
+        {
+            var dir = Path.GetDirectoryName(FileName);
+            var dic = new Dictionary<string, string>();
+
+            foreach (var ident in Images.Keys)
+            {
+                dic.Add(ident, new FileInfo(Path.Combine(dir, Images[ident])).FullName);
+            }
+
+            return dic;
         }
 
         internal void OnSaving(string fileName)
@@ -167,14 +204,19 @@ namespace ImageSprites
             }
         }
 
+        /// <summary>Fires before a file is written to disk.</summary>
         public static event FileSystemEventHandler Saving;
+
+        /// <summary>Fires after a file is written to disk.</summary>
         public static event FileSystemEventHandler Saved;
 
+        /// <summary>Internal use only. Used by the JSON.NET serializer</summary>
         public bool ShouldSerializeDpi()
         {
             return Dpi != 96;
         }
 
+        /// <summary>Internal use only. Used by the JSON.NET serializer</summary>
         public bool ShouldSerializeStylesheet()
         {
             return Stylesheet != Stylesheet.None;

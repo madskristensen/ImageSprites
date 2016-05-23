@@ -7,14 +7,20 @@ using System.Threading.Tasks;
 
 namespace ImageSprites
 {
+    /// <summary>
+    /// A generator for producing image sprites.
+    /// </summary>
     public class SpriteGenerator
     {
+        /// <summary>
+        /// Generates an image sprite based on the specified <see cref="SpriteDocument"/>.
+        /// </summary>
         public async Task Generate(SpriteDocument doc)
         {
             var images = GetImages(doc);
 
-            int width = doc.Orientation == Direction.Vertical ? images.Values.Max(i => i.Item2.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Item2.Width) + (doc.Padding * images.Count) + doc.Padding;
-            int height = doc.Orientation == Direction.Vertical ? images.Values.Sum(img => img.Item2.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Item2.Height) + (doc.Padding * 2);
+            int width = doc.Orientation == Orientation.Vertical ? images.Values.Max(i => i.Item2.Width) + (doc.Padding * 2) : images.Values.Sum(i => i.Item2.Width) + (doc.Padding * images.Count) + doc.Padding;
+            int height = doc.Orientation == Orientation.Vertical ? images.Values.Sum(img => img.Item2.Height) + (doc.Padding * images.Count) + doc.Padding : images.Values.Max(img => img.Item2.Height) + (doc.Padding * 2);
 
             List<SpriteFragment> fragments = new List<SpriteFragment>();
 
@@ -24,7 +30,7 @@ namespace ImageSprites
 
                 using (Graphics canvas = Graphics.FromImage(bitmap))
                 {
-                    if (doc.Orientation == Direction.Vertical)
+                    if (doc.Orientation == Orientation.Vertical)
                         Vertical(images, fragments, canvas, doc.Padding);
                     else
                         Horizontal(images, fragments, canvas, doc.Padding);
@@ -95,15 +101,18 @@ namespace ImageSprites
 
         internal void OnSaving(string fileName, SpriteDocument doc)
         {
-            Saving?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
+            Saving?.Invoke(this, new SpriteImageGenerationEventArgs(fileName, doc));
         }
 
         internal void OnSaved(string fileName, SpriteDocument doc)
         {
-            Saved?.Invoke(null, new SpriteImageGenerationEventArgs(fileName, doc));
+            Saved?.Invoke(this, new SpriteImageGenerationEventArgs(fileName, doc));
         }
 
+        /// <summary>Fires before a file is written to disk.</summary>
         public event SpriteImageGenerationEventHandler Saving;
+
+        /// <summary>Fires after a file is written to disk.</summary>
         public event SpriteImageGenerationEventHandler Saved;
     }
 }

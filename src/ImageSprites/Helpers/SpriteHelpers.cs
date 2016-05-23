@@ -4,8 +4,14 @@ using System.IO;
 
 namespace ImageSprites
 {
+    /// <summary>
+    /// A collection of methods that are helpful for working with image sprites.
+    /// </summary>
     public static class SpriteHelpers
     {
+        /// <summary>
+        /// Calculates the relative path between two files.
+        /// </summary>
         public static string MakeRelative(string fileBase, string file)
         {
             Uri one = new Uri(fileBase);
@@ -14,6 +20,9 @@ namespace ImageSprites
             return one.MakeRelativeUri(two).ToString().Replace("\\", "/");
         }
 
+        /// <summary>
+        /// Calculates an identifier based on the provided file.
+        /// </summary>
         public static string GetIdentifier(string imageFile)
         {
             return Path.GetFileNameWithoutExtension(imageFile)
@@ -21,7 +30,7 @@ namespace ImageSprites
                        .Replace(" ", string.Empty);
         }
 
-        public static ImageFormat ExtensionFromFormat(ImageType format)
+        internal static ImageFormat ExtensionFromFormat(ImageType format)
         {
             switch (format)
             {
@@ -34,7 +43,7 @@ namespace ImageSprites
             return ImageFormat.Png;
         }
 
-        public static ImageType GetImageFormatFromExtension(string file)
+        internal static ImageType GetImageFormatFromExtension(string file)
         {
             string extension = Path.GetExtension(file);
 

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ImageSprites.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\StylesheetType.cs" />
+    <Compile Include="Enums\Stylesheet.cs" />
     <Compile Include="Helpers\SpriteHelpers.cs" />
     <Compile Include="Enums\ImageType.cs" />
     <Compile Include="Enums\Optimizations.cs" />
-    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Enums\Orientation.cs" />
     <Compile Include="SpriteDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteExporter.cs" />
