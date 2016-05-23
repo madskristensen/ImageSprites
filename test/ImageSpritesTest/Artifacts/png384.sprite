@@ -1,12 +1,12 @@
 {
-  "images": [
-    "images/384dpi/a.png",
-    "images/384dpi/b.png",
-    "images/384dpi/c.png",
-    "images/384dpi/d.png",
-    "images/384dpi/e.png",
-    "images/384dpi/f.png"
-  ],
+  "images": {
+    "a": "images/384dpi/a.png",
+    "b": "images/384dpi/b.png",
+    "c": "images/384dpi/c.png",
+    "d": "images/384dpi/d.png",
+    "e": "images/384dpi/e.png",
+    "f": "images/384dpi/f.png"
+  },
   "dpi": 384,
   "stylesheets": {
     "formats": []

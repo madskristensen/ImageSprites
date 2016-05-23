@@ -1,8 +1,10 @@
 # Roadmap
 
+- [x] Updated format of .sprite JSON to use name-file pairs
+- [x] Generated file names all contain *.sprite* in them
 - [ ] Command to update all sprites in solution
 - [ ] Call Web Compiler to recompile when sprite updated
-
+- [ ] Support drag 'n drop of image files onto .sprite file
 
 Features that have a checkmark are complete and available for
 download in the

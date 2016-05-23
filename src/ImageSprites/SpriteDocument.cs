@@ -21,7 +21,7 @@ namespace ImageSprites
         public SpriteDocument(string fileName, IEnumerable<string> images)
         {
             FileName = fileName;
-            Images = images;
+            AddImages(images);
 
             if (images.Any())
             {
@@ -36,7 +36,7 @@ namespace ImageSprites
         public string FileName { get; set; }
 
         [JsonProperty("images")]
-        public IEnumerable<string> Images { get; set; }
+        public IDictionary<string, string> Images { get; set; }
 
         [JsonProperty("direction")]
         public Direction Direction { get; set; } = Direction.Vertical;
@@ -85,14 +85,17 @@ namespace ImageSprites
             }
         }
 
-        public IEnumerable<string> ToAbsoluteImages()
+        public IDictionary<string, string> ToAbsoluteImages()
         {
             var dir = Path.GetDirectoryName(FileName);
+            var dic = new Dictionary<string, string>();
 
-            foreach (var file in Images)
+            foreach (var ident in Images.Keys)
             {
-                yield return new FileInfo(Path.Combine(dir, file)).FullName;
+                dic.Add(ident, new FileInfo(Path.Combine(dir, Images[ident])).FullName);
             }
+
+            return dic;
         }
 
         public async Task Save()
@@ -109,6 +112,23 @@ namespace ImageSprites
                 await writer.WriteAsync(json).ConfigureAwait(false);
                 OnSaved(FileName);
             }
+        }
+
+        public void AddImages(IEnumerable<string> files)
+        {
+            var dic = new Dictionary<string, string>();
+
+            foreach (var file in files)
+            {
+                string name = Path.GetFileNameWithoutExtension(file).ToLowerInvariant().Replace(" ", string.Empty);
+
+                if (dic.ContainsKey(name))
+                    name += "_" + Guid.NewGuid().ToString().Replace("-", string.Empty);
+
+                dic.Add(name, file);
+            }
+
+            Images = dic;
         }
 
         internal void OnSaving(string fileName)

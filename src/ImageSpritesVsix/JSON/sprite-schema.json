@@ -22,10 +22,10 @@
       "default": "png"
     },
     "images": {
-      "description": "An array of file paths relative to this document.",
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
+      "description": "An array of file paths relative to this document. The name must be unique.",
+      "type": "object",
+      "additionalProperties": {
+        "description": "A source image for the sprite.",
         "type": "string",
         "format": "sprite_relativepath"
       }

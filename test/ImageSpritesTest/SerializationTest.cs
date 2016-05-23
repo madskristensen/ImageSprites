@@ -29,7 +29,7 @@ namespace ImageSpritesTest
         public async Task CreateDocument()
         {
             var original = new SpriteDocument(_fileName);
-            original.Images = new[] { "img/a.png", "img/b.png" };
+            original.AddImages(new[] { "img/a.png", "img/b.png" });
             original.Format = ImageType.Jpg;
             await original.Save();
 
@@ -41,7 +41,7 @@ namespace ImageSpritesTest
             Assert.AreEqual(original.Images.Count(), read.Images.Count());
 
             var input = new FileInfo(Path.Combine(_artifacts, "img/a.png")).FullName;
-            Assert.AreEqual(input, read.ToAbsoluteImages().First());
+            Assert.AreEqual(input, read.ToAbsoluteImages().First().Value);
         }
     }
 }

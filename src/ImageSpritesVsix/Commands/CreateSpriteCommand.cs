@@ -54,7 +54,7 @@ namespace ImageSpritesVsix
             if (GetFileName(folder, out spriteFile))
             {
                 var doc = new SpriteDocument(spriteFile);
-                doc.Images = files.Select(f => PackageUtilities.MakeRelative(spriteFile, f));
+                doc.AddImages(files.Select(f => PackageUtilities.MakeRelative(spriteFile, f).Replace("\\", "/")));
 
                 await doc.Save();
                 await SpriteService.GenerateSprite(doc);

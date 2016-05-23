@@ -25,8 +25,8 @@ namespace ImageSpritesTest
         public async Task Png96Dpi()
         {
             var fileName = Path.Combine(_artifacts, "png96.sprite");
-            var imgFile = Path.ChangeExtension(fileName, ".jpg");
-            var lessFile = Path.ChangeExtension(fileName, ".less");
+            var imgFile = fileName + ".jpg";
+            var lessFile = fileName + ".less";
 
             try
             {
@@ -54,7 +54,7 @@ namespace ImageSpritesTest
         public async Task Png384Dpi()
         {
             var fileName = Path.Combine(_artifacts, "png384.sprite");
-            var imgFile = Path.ChangeExtension(fileName, ".png");
+            var imgFile = fileName + ".png";
 
             try
             {

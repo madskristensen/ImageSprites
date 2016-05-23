@@ -13,12 +13,13 @@ namespace ImageSprites
             if (doc?.Stylesheets == null)
                 return;
 
+            var mainClass = Path.GetFileNameWithoutExtension(doc.FileName).ToLowerInvariant().Replace(" ", "");
+
             foreach (var format in doc.Stylesheets.Formats)
             {
-                string outputFile = Path.ChangeExtension(doc.FileName, "." + format.ToString().ToLowerInvariant());
+                string outputFile = doc.FileName + "." + format.ToString().ToLowerInvariant();
                 var outputDirectory = Path.GetDirectoryName(outputFile);
                 var bgUrl = MakeRelative(outputFile, Path.ChangeExtension(doc.FileName, doc.OutputExtension));
-                var mainClass = Path.GetFileNameWithoutExtension(doc.FileName).ToLowerInvariant().Replace(" ", "");
 
                 StringBuilder sb = new StringBuilder(GetDescription(format));
 
@@ -35,7 +36,7 @@ namespace ImageSprites
                 {
                     if (format == ExportFormat.Css)
                     {
-                        sb.AppendLine($"{GetSelector(fragment.FileName, mainClass, format)} {{");
+                        sb.AppendLine($"{GetSelector(fragment.ID, mainClass, format)} {{");
                         sb.AppendLine($"\twidth: {fragment.Width}px;");
                         sb.AppendLine($"\theight: {fragment.Height}px;");
                         sb.AppendLine($"\tbackground-position: -{fragment.X}px -{fragment.Y}px;");
@@ -43,7 +44,7 @@ namespace ImageSprites
                     }
                     else
                     {
-                        sb.AppendLine(GetSelector(fragment.FileName, mainClass, format) + " {");
+                        sb.AppendLine(GetSelector(fragment.ID, mainClass, format) + " {");
                         sb.AppendLine($"\twidth: {fragment.Width}px;");
                         sb.AppendLine($"\theight: {fragment.Height}px;");
                         sb.AppendLine($"\tdisplay: block;");
@@ -84,16 +85,17 @@ namespace ImageSprites
             return "/*" + Environment.NewLine + text + Environment.NewLine + "*/" + Environment.NewLine;
         }
 
-        private static string GetSelector(string fileName, string mainClass, ExportFormat format)
+        private static string GetSelector(string ident, string mainClass, ExportFormat format)
         {
-            string className = Path.GetFileNameWithoutExtension(fileName).ToLowerInvariant().Replace(" ", "");
-
-            if (format == ExportFormat.Less)
-                return $".{mainClass}-{className}()";
-            else if (format == ExportFormat.Scss)
-                return $"@mixin {mainClass}-{className}()";
-
-            return $".{mainClass}.{className}";
+            switch (format)
+            {
+                case ExportFormat.Less:
+                    return $".{mainClass}-{ident}()";
+                case ExportFormat.Scss:
+                    return $"@mixin {mainClass}-{ident}()";
+                default: // CSS
+                    return $".{mainClass}.{ident}";
+            }
         }
     }
 }
