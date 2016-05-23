@@ -1,10 +1,26 @@
-﻿using System.Drawing.Imaging;
+﻿using System;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace ImageSprites
 {
-    internal static class SHelpers
+    public static class SpriteHelpers
     {
+        public static string MakeRelative(string fileBase, string file)
+        {
+            Uri one = new Uri(fileBase);
+            Uri two = new Uri(file);
+
+            return one.MakeRelativeUri(two).ToString().Replace("\\", "/");
+        }
+
+        public static string GetIdentifier(string imageFile)
+        {
+            return Path.GetFileNameWithoutExtension(imageFile)
+                       .ToLowerInvariant()
+                       .Replace(" ", string.Empty);
+        }
+
         public static ImageFormat ExtensionFromFormat(ImageType format)
         {
             switch (format)

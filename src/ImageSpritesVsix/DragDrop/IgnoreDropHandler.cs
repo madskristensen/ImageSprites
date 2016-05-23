@@ -26,8 +26,8 @@ namespace ImageSpritesVsix
             var position = dragDropInfo.VirtualBufferPosition.Position;
             var doc = SpriteDocument.FromJSON(_view.TextBuffer.CurrentSnapshot.GetText());
 
-            string ident = Path.GetFileNameWithoutExtension(_documentFileName).ToLowerInvariant().Replace(" ", string.Empty);
-            string file = PackageUtilities.MakeRelative(_documentFileName, _draggedFileName).Replace("\\", "/");
+            string ident = SpriteHelpers.GetIdentifier(_draggedFileName);
+            string file = SpriteHelpers.MakeRelative(_documentFileName, _draggedFileName);
 
             doc.Images.Add(new KeyValuePair<string, string>(ident, file));
 

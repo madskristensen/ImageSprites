@@ -33,7 +33,7 @@ namespace ImageSprites
                 string outputFile = doc.FileName + doc.OutputExtension;
 
                 OnSaving(outputFile, doc);
-                bitmap.Save(outputFile, ImageHelpers.ExtensionFromFormat(doc.Format));
+                bitmap.Save(outputFile, SpriteHelpers.ExtensionFromFormat(doc.Format));
                 OnSaved(outputFile, doc);
             }
 

@@ -28,7 +28,7 @@ namespace ImageSprites
                 var first = Image.FromFile(images.First());
                 Resolution = (int)Math.Round(first.HorizontalResolution);
 
-                Format = ImageHelpers.GetImageFormatFromExtension(images.First());
+                Format = SpriteHelpers.GetImageFormatFromExtension(images.First());
             }
         }
 
@@ -130,7 +130,7 @@ namespace ImageSprites
 
             foreach (var file in files)
             {
-                string name = Path.GetFileNameWithoutExtension(file).ToLowerInvariant().Replace(" ", string.Empty);
+                string name = SpriteHelpers.GetIdentifier(file);
 
                 if (dic.ContainsKey(name))
                     name += "_" + Guid.NewGuid().ToString().Replace("-", string.Empty);

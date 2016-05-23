@@ -13,13 +13,13 @@ namespace ImageSprites
             if (doc?.Stylesheets == null)
                 return;
 
-            var mainClass = Path.GetFileNameWithoutExtension(doc.FileName).ToLowerInvariant().Replace(" ", "");
+            var mainClass = SpriteHelpers.GetIdentifier(doc.FileName);
 
             foreach (var format in doc.Stylesheets.Formats)
             {
                 string outputFile = doc.FileName + "." + format.ToString().ToLowerInvariant();
                 var outputDirectory = Path.GetDirectoryName(outputFile);
-                var bgUrl = MakeRelative(outputFile, doc.FileName + doc.OutputExtension);
+                var bgUrl = SpriteHelpers.MakeRelative(outputFile, doc.FileName + doc.OutputExtension);
 
                 StringBuilder sb = new StringBuilder(GetDescription(format));
 
@@ -65,14 +65,6 @@ namespace ImageSprites
                     generator.OnSaved(outputFile, doc);
                 }
             }
-        }
-
-        private static string MakeRelative(string fileBase, string file)
-        {
-            Uri address1 = new Uri(fileBase);// Create a new Uri from a string.
-            Uri address2 = new Uri(file);
-
-            return address1.MakeRelativeUri(address2).ToString();
         }
 
         private static string GetDescription(ExportFormat format)

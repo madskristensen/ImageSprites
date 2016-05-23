@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ExportFormat.cs" />
-    <Compile Include="Helpers\ImageHelpers.cs" />
+    <Compile Include="Helpers\SpriteHelpers.cs" />
     <Compile Include="Enums\ImageType.cs" />
     <Compile Include="Enums\Optimizations.cs" />
     <Compile Include="Enums\Direction.cs" />
