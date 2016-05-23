@@ -57,6 +57,7 @@ namespace ImageSpritesVsix
                 doc.AddImages(files.Select(f => SpriteHelpers.MakeRelative(spriteFile, f)));
 
                 await doc.Save();
+                ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);
                 await SpriteService.GenerateSprite(doc);
             }
         }

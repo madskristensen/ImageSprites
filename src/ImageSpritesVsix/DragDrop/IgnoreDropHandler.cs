@@ -29,6 +29,9 @@ namespace ImageSpritesVsix
             string ident = SpriteHelpers.GetIdentifier(_draggedFileName);
             string file = SpriteHelpers.MakeRelative(_documentFileName, _draggedFileName);
 
+            if (doc.Images.ContainsKey(ident))
+                ident += "_" + Guid.NewGuid().ToString().Replace("-", string.Empty);
+
             doc.Images.Add(new KeyValuePair<string, string>(ident, file));
 
             using (var edit = _view.TextBuffer.CreateEdit())
