@@ -31,6 +31,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Configurable DPI for high resolution images
 - Works with both [Web Compiler](https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c)
 and [Bundler & Minifier](https://visualstudiogallery.msdn.microsoft.com/9ec27da7-e24b-4d56-8064-fd7e88ac1c40)
+- Drag 'n drop of image files supported
 
 ### Create image sprite
 Select the images in Solution Explorer and click

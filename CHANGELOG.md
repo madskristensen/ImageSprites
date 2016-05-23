@@ -1,13 +1,6 @@
 # Roadmap
 
-- [x] Updated format of .sprite JSON to use name-file pairs
-- [x] Generated file names all contain *.sprite* in them
-- [x] Support drag 'n drop of image files onto .sprite file
-- [x] Open the .sprite file after it's created
-- [x] Command to update all sprites in solution
-- [x] Updated format to be more self-explanatory
-- [x] Logo watermark in .sprite files 
-- [ ] Call Web Compiler to recompile when sprite updated
+- [ ] nothing yet...
 
 Features that have a checkmark are complete and available for
 download in the
@@ -17,6 +10,18 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 1.1
+
+**2016-05-23**
+
+- [x] Updated format of .sprite JSON to use name-file pairs
+- [x] Generated file names all contain *.sprite* in them
+- [x] Support drag 'n drop of image files onto .sprite file
+- [x] Open the .sprite file after it's created
+- [x] Command to update all sprites in solution
+- [x] Updated format to be more self-explanatory
+- [x] Logo watermark in .sprite files 
 
 ## 1.0
 

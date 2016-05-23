@@ -11,7 +11,7 @@ namespace ImageSpritesVsix
         public const string Name = "Image Sprites";
         public const string Description = "Boost your website's performance by creating image sprites to reduce the amount of HTTP requests needed.";
         public const string Language = "en-US";
-        public const string Version = "1.0";
+        public const string Version = "1.1";
         public const string Author = "Mads Kristensen";
         public const string Tags = "image, sprite, jpg, gif, png, css, stylesheet";
     }
