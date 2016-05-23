@@ -98,6 +98,11 @@ to make it even easier.
 
 ![Context menu update](art/context-menu-update.png)
 
+You can update all image sprites by right-clicking on either
+the project or solution and select *Update All Image Sprites*.
+
+![Context menu update all](art/context-menu-updateall.png)
+
 ## Consume the sprite
 You can use the sprite from CSS, LESS or Sass.
 
