@@ -4,7 +4,7 @@
 - [x] Generated file names all contain *.sprite* in them
 - [x] Support drag 'n drop of image files onto .sprite file
 - [x] Open the .sprite file after it's created
-- [ ] Command to update all sprites in solution
+- [x] Command to update all sprites in solution
 - [ ] Call Web Compiler to recompile when sprite updated
 
 Features that have a checkmark are complete and available for

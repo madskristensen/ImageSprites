@@ -48,6 +48,28 @@ namespace ImageSpritesVsix
             }
         }
 
+        public static bool GetProjectOrSolution(out Project project, out Solution2 solution)
+        {
+            var items = (Array)DTE.ToolWindows.SolutionExplorer.SelectedItems;
+            project = null;
+            solution = null;
+
+            foreach (UIHierarchyItem selItem in items)
+            {
+                var projItem = selItem.Object as Project;
+
+                if (projItem != null)
+                    project = projItem;
+
+                var solItem = selItem.Object as Solution2;
+
+                if (solItem != null)
+                    solution = solItem;
+            }
+
+            return project != null || solution != null;
+        }
+
         public static IEnumerable<string> GetSelectedItemPaths()
         {
             foreach (ProjectItem item in GetSelectedItems())

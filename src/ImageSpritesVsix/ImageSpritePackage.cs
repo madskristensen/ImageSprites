@@ -15,9 +15,11 @@ namespace ImageSpritesVsix
         protected override void Initialize()
         {
             Logger.Initialize(this, Vsix.Name);
+
             SpriteService.Initialize();
             CreateSpriteCommand.Initialize(this);
             UpdateSpriteCommand.Initialize(this);
+            UpdateAllSpritesCommand.Initialize(this);
 
             base.Initialize();
         }

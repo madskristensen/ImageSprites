@@ -44,6 +44,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\UpdateAllSpritesCommand.cs" />
     <Compile Include="Commands\UpdateSpriteCommand.cs" />
     <Compile Include="Commands\CreateSpriteCommand.cs" />
     <Compile Include="Commands\SpriteCreationListener.cs" />
