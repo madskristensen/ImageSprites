@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageSprites
 {
-    internal class SpriteExporter
+    internal class SpriteStylesheetGenerator
     {
-        public async static Task ExportStylesheet(IEnumerable<SpriteFragment> fragments, SpriteDocument doc, SpriteGenerator generator)
+        public async static Task ExportStylesheet(IEnumerable<SpriteFragment> fragments, SpriteDocument doc, SpriteImageGenerator generator)
         {
             if (doc.Stylesheet == Stylesheet.None)
                 return;
@@ -26,7 +26,7 @@ namespace ImageSprites
                 sb.AppendLine($".{mainClass} {{");
                 sb.AppendLine($"\tbackground-image: url('{bgUrl}');");
                 sb.AppendLine($"\tbackground-repeat: no-repeat;");
-                sb.AppendLine($"\tdisplay: block;");
+                AddCustomStyles(doc.CustomStyles, sb);
                 sb.AppendLine("}");
             }
 
@@ -45,7 +45,7 @@ namespace ImageSprites
                     sb.AppendLine(GetSelector(fragment.ID, mainClass, doc.Stylesheet) + " {");
                     sb.AppendLine($"\twidth: {fragment.Width}px;");
                     sb.AppendLine($"\theight: {fragment.Height}px;");
-                    sb.AppendLine($"\tdisplay: block;");
+                    AddCustomStyles(doc.CustomStyles, sb);
                     sb.AppendLine($"\tbackground: url('{bgUrl}') -{fragment.X}px -{fragment.Y}px no-repeat;");
                     sb.AppendLine("}");
                 }
@@ -61,6 +61,14 @@ namespace ImageSprites
                 generator.OnSaving(outputFile, doc);
                 await writer.WriteAsync(sb.ToString().Replace("-0px", "0"));
                 generator.OnSaved(outputFile, doc);
+            }
+        }
+
+        private static void AddCustomStyles(IDictionary<string, object> customStyles, StringBuilder sb)
+        {
+            foreach (string property in customStyles.Keys)
+            {
+                sb.AppendLine($"\t{property}: {customStyles[property]};");
             }
         }
 

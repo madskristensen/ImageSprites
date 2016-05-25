@@ -10,5 +10,9 @@
   "orientation": "horizontal",
   "padding": 20,
   "output": "jpg",
-  "stylesheet": "less"
+  "stylesheet": "less",
+  "customstyles": {
+    "display": "block",
+    "margin": 0
+  }
 }

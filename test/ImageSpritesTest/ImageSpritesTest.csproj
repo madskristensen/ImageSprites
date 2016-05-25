@@ -102,7 +102,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Artifacts_4png384_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
+      <UserProperties Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" Artifacts_4png384_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

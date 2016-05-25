@@ -68,6 +68,10 @@ namespace ImageSprites
         [JsonProperty("pathprefix")]
         public string PathPrefix { get; set; } = string.Empty;
 
+        /// <summary>The path to prepend to url in the stylesheet's "url()" function.</summary>
+        [JsonProperty("customstyles")]
+        public IDictionary<string, object> CustomStyles { get; set; } = new Dictionary<string, object> { { "display", "block" } };
+
         /// <summary>The file extension of the output sprite image.</summary>
         [JsonIgnore]
         public string OutputExtension

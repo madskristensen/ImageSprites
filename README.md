@@ -60,7 +60,10 @@ is stored. It looks something like this:
   "output": "png",
   "dpi": 384,
   "stylesheet": "css",
-  "pathprefix": "/images/"
+  "pathprefix": "/images/",
+  "customstyles": {
+    "display": "block"
+  }
 }
 ```
 
@@ -89,6 +92,9 @@ it easy to use the image sprite in any web project.
 
 **pathprefix** adds a prefix string to the image path in
 the *url(path)* value in the stylesheet.
+
+**customstyles** allows you to inject any css declarations
+into the generated stylesheets.
 
 ### Update image sprite
 Every time the .sprite file is modified and saved, the image

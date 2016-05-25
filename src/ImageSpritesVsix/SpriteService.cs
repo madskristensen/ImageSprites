@@ -9,14 +9,14 @@ namespace ImageSpritesVsix
 {
     class SpriteService
     {
-        private static SpriteGenerator _generator;
+        private static SpriteImageGenerator _generator;
 
         public static void Initialize()
         {
             SpriteDocument.Saving += SpriteSaving;
             SpriteDocument.Saved += SpriteSaved;
 
-            _generator = new SpriteGenerator();
+            _generator = new SpriteImageGenerator();
             _generator.Saving += SpriteImageSaving;
             _generator.Saved += SpriteImageSaved;
         }

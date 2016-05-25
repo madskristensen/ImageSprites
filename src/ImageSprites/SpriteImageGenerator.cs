@@ -9,7 +9,7 @@ namespace ImageSprites
     /// <summary>
     /// A generator for producing image sprites.
     /// </summary>
-    public class SpriteGenerator
+    public class SpriteImageGenerator
     {
         /// <summary>
         /// Generates an image sprite based on the specified <see cref="SpriteDocument"/>.
@@ -42,7 +42,7 @@ namespace ImageSprites
                 OnSaved(outputFile, doc);
             }
 
-            await SpriteExporter.ExportStylesheet(fragments, doc, this);
+            await SpriteStylesheetGenerator.ExportStylesheet(fragments, doc, this);
         }
 
         private static void Vertical(Dictionary<string, Bitmap> images, List<SpriteFragment> fragments, Graphics canvas, int margin)

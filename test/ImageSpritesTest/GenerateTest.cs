@@ -12,13 +12,13 @@ namespace ImageSpritesTest
     public class GenerateTest
     {
         private string _artifacts;
-        private SpriteGenerator _generator;
+        private SpriteImageGenerator _generator;
 
         [TestInitialize]
         public void Setup()
         {
             _artifacts = new DirectoryInfo(@"..\..\Artifacts").FullName;
-            _generator = new SpriteGenerator();
+            _generator = new SpriteImageGenerator();
             _generator.Saving += SavingEventHandler;
             _generator.Saved += SavingEventHandler;
         }
@@ -50,6 +50,7 @@ namespace ImageSpritesTest
                 string less = File.ReadAllText(lessFile);
                 Assert.IsTrue(less.Contains(".png96-a()"), "Sprite \"a.png\" not generated");
                 Assert.IsTrue(less.Contains("url('png96.sprite.jpg')"), "Incorrect url value");
+                Assert.IsTrue(less.Contains("margin: 0"), "Incorrect custom style");
             }
             finally
             {
@@ -80,6 +81,7 @@ namespace ImageSpritesTest
                 string css = File.ReadAllText(cssFile);
                 Assert.IsTrue(css.Contains(".png384.a"), "Sprite \"a.png\" not generated");
                 Assert.IsTrue(css.Contains("url('png384.sprite.png')"), "Incorrect url value");
+                Assert.IsTrue(css.Contains("display: block"), "Incorrect custom style");
             }
             finally
             {
