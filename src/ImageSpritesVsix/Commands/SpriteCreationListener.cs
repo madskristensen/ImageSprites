@@ -12,6 +12,8 @@ namespace ImageSpritesVsix
     [TextViewRole(PredefinedTextViewRoles.PrimaryDocument)]
     class SpriteCreationListener : IVsTextViewCreationListener
     {
+        private static bool _hasReloadedSchemas;
+
         [Import]
         public IVsEditorAdaptersFactoryService EditorAdaptersFactoryService { get; set; }
 
@@ -26,6 +28,12 @@ namespace ImageSpritesVsix
             if (TextDocumentFactoryService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out doc))
             {
                 doc.FileActionOccurred += DocumentSaved;
+
+                if (!_hasReloadedSchemas)
+                {
+                    ProjectHelpers.ExecuteCommand("OtherContextMenus.JSONContext.ReloadSchemas");
+                    _hasReloadedSchemas = true;
+                }
             }
         }
 

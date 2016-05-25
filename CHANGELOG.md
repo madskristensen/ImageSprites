@@ -1,7 +1,7 @@
 # Roadmap
 
 - [x] Uploading JSON schema to [SchemaStore.org](http://schemastore.org)
-- [ ] Reload schemas when .sprite file is opened 
+- [x] Reload schemas when .sprite file is opened 
 - [x] Support for "VS15"
 - [x] Use the version of JSON.NET shipped in VS
 - [x] Add custom CSS declarations to the generated stylesheet
