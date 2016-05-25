@@ -11,9 +11,6 @@ build_script:
   - nuget restore -Verbosity quiet
   - msbuild /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m
 
-test_script:
-  - vstest.console /logger:Appveyor **\ImageSpritesTest.dll /Enablecodecoverage
-
 after_test:
   - ps: Vsix-PushArtifacts | Vsix-PublishToGallery
 
