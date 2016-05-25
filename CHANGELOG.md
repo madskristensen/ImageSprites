@@ -1,6 +1,8 @@
 # Roadmap
 
-- [ ] nothing yet...
+- [x] Uploading JSON schema to [SchemaStore.org](http://schemastore.org)
+- [x] Support for "VS15"
+- [x] Use the version of JSON.NET shipped in VS
 
 Features that have a checkmark are complete and available for
 download in the
