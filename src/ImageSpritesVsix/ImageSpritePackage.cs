@@ -10,7 +10,7 @@ namespace ImageSpritesVsix
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [Guid(PackageGuids.guidPackageString)]
-    public sealed class ImageSpritePackage : Package
+    internal sealed class ImageSpritePackage : Package
     {
         protected override void Initialize()
         {

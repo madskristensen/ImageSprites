@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace ImageSpritesVsix
 {
-    public static class ProjectHelpers
+    internal static class ProjectHelpers
     {
         static ProjectHelpers()
         {

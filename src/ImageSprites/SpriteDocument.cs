@@ -46,7 +46,7 @@ namespace ImageSprites
 
         /// <summary>Image optimization settings.</summary>
         [JsonProperty("optimize")]
-        public Optimizations Optimize { get; set; } = Optimizations.Lossless;
+        public Optimization Optimize { get; set; } = Optimization.Lossless;
 
         /// <summary>The padding size in pixels around each individual image in the sprite.</summary>
         [JsonProperty("padding")]
@@ -70,7 +70,7 @@ namespace ImageSprites
 
         /// <summary>The path to prepend to url in the stylesheet's "url()" function.</summary>
         [JsonProperty("customstyles")]
-        public IDictionary<string, object> CustomStyles { get; set; } = new Dictionary<string, object> { { "display", "block" } };
+        public IDictionary<string, object> CustomStyles { get; } = new Dictionary<string, object> { { "display", "block" } };
 
         /// <summary>The file extension of the output sprite image.</summary>
         [JsonIgnore]
@@ -105,7 +105,7 @@ namespace ImageSprites
         /// <param name="json">A string of valid JSON.</param>
         /// <param name="fileName">Optionally provide a file name for error handling purposes.</param>
         /// <returns></returns>
-        public static SpriteDocument FromJSON(string json, string fileName = null)
+        public static SpriteDocument FromJSON(string json, string fileName)
         {
             try
             {

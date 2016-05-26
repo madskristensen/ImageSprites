@@ -1,7 +1,7 @@
 using System;
 using Microsoft.VisualStudio.Shell.Interop;
 
-public static class Logger
+internal static class Logger
 {
     private static string _name;
     private static IVsOutputWindowPane _pane;

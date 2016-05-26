@@ -24,7 +24,7 @@ namespace ImageSpritesVsix
         public DragDropPointerEffects HandleDataDropped(DragDropInfo dragDropInfo)
         {
             var position = dragDropInfo.VirtualBufferPosition.Position;
-            var doc = SpriteDocument.FromJSON(_view.TextBuffer.CurrentSnapshot.GetText());
+            var doc = SpriteDocument.FromJSON(_view.TextBuffer.CurrentSnapshot.GetText(), _documentFileName);
 
             string ident = SpriteHelpers.GetIdentifier(_draggedFileName);
             string file = SpriteHelpers.MakeRelative(_documentFileName, _draggedFileName);

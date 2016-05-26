@@ -3,7 +3,7 @@ namespace ImageSprites
     /// <summary>
     /// Image optimization types used to compress and optimmize the output sprite image.
     /// </summary>
-    public enum Optimizations
+    public enum Optimization
     {
         /// <summary>No optimization will by applied.</summary>
         None,

@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
@@ -64,6 +68,7 @@
   <ItemGroup>
     <None Include="Artifacts\png384.sprite" />
     <None Include="Artifacts\png96.sprite" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Artifacts\Images\384dpi\a.png" />
@@ -102,7 +107,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" Artifacts_4png384_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
+      <UserProperties Artifacts_4png384_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" Artifacts_4png96_1sprite__JSONSchema="..\..\..\src\ImageSpritesVsix\JSON\sprite-schema.json" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

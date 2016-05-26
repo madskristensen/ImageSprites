@@ -57,7 +57,7 @@ namespace ImageSpritesTest
         {
             try
             {
-                SpriteDocument.FromJSON("\"images\": {\"a\": \"dontexist.png\"}}");
+                SpriteDocument.FromJSON("\"images\": {\"a\": \"dontexist.png\"}}", null);
             }
             catch (SpriteParseException ex)
             {

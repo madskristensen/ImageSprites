@@ -27,18 +27,18 @@ namespace ImageSpritesVsix
             OptimizeImage(e.FileName, e.Document.Optimize);
         }
 
-        private static void OptimizeImage(string fileName, Optimizations optimization)
+        private static void OptimizeImage(string fileName, Optimization optimization)
         {
             try
             {
                 string ext = Path.GetExtension(fileName);
 
-                if (optimization != Optimizations.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+                if (optimization != Optimization.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
                 {
                     ProjectHelpers.SelectInSolutionExplorer(fileName);
                     string cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossless";
 
-                    if (optimization == Optimizations.Lossy)
+                    if (optimization == Optimization.Lossy)
                         cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossy";
 
                     ProjectHelpers.ExecuteCommand(cmd);

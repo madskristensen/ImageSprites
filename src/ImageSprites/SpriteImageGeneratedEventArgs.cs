@@ -22,9 +22,4 @@ namespace ImageSprites
         /// <summary>The <see cref="SpriteDocument"/> used in the generation.</summary>
         public SpriteDocument Document { get; set; }
     }
-
-    /// <summary>
-    /// A delegate that makes it easy to raise sprite image generation events.
-    /// </summary>
-    public delegate void SpriteImageGenerationEventHandler(object sender, SpriteImageGenerationEventArgs e);
 }

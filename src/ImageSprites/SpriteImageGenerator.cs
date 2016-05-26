@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -107,9 +108,9 @@ namespace ImageSprites
         }
 
         /// <summary>Fires before a file is written to disk.</summary>
-        public event SpriteImageGenerationEventHandler Saving;
+        public event EventHandler<SpriteImageGenerationEventArgs> Saving;
 
         /// <summary>Fires after a file is written to disk.</summary>
-        public event SpriteImageGenerationEventHandler Saved;
+        public event EventHandler<SpriteImageGenerationEventArgs> Saved;
     }
 }

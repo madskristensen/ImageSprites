@@ -47,13 +47,13 @@ namespace ImageSprites
         {
             string extension = Path.GetExtension(file);
 
-            switch (extension.ToLowerInvariant())
+            switch (extension.ToUpperInvariant())
             {
-                case ".jpg":
-                case ".jpeg":
+                case ".JPG":
+                case ".JPEG":
                     return ImageType.Jpg;
 
-                case ".gif":
+                case ".GIF":
                     return ImageType.Gif;
             }
 
