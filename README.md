@@ -73,7 +73,7 @@ of the images are maintained in the generated sprite image.
 The name of the image will be persisted in the generated
 stylesheet as class names.
 
-**direction** determines if the images are layed out either
+**orientation** determines if the images are layed out either
 horizontally or vertically. 
 
 **padding** is the distance of whitespace inserted around each
