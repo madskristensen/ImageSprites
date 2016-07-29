@@ -43,6 +43,12 @@ namespace ImageSprites
                 OnSaved(outputFile, doc);
             }
 
+            // Clean up
+            foreach (var image in images.Values)
+            {
+                image.Dispose();
+            }
+
             await SpriteStylesheetGenerator.ExportStylesheet(fragments, doc, this);
         }
 

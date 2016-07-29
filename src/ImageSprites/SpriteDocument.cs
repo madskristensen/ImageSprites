@@ -174,7 +174,8 @@ namespace ImageSprites
 
             foreach (var ident in Images.Keys)
             {
-                dic.Add(ident, new FileInfo(Path.Combine(dir, Images[ident])).FullName);
+                string path = Uri.UnescapeDataString(Images[ident]);
+                dic.Add(ident, new FileInfo(Path.Combine(dir, path)).FullName);
             }
 
             return dic;

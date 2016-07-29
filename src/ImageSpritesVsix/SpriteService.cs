@@ -21,9 +21,15 @@ namespace ImageSpritesVsix
             _generator.Saved += SpriteImageSaved;
         }
 
-        private static void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
+        private static async void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
         {
             ProjectHelpers.AddNestedFile(e.Document.FileName, e.FileName);
+
+            var project = ProjectHelpers.DTE.Solution.FindProjectItem(e.Document.FileName)?.ContainingProject;
+
+            if (project != null && project.IsKind(ProjectHelpers.ProjectTypes.ASPNET_5))
+                await Task.Delay(2000);
+
             OptimizeImage(e.FileName, e.Document.Optimize);
         }
 
