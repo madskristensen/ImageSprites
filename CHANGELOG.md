@@ -1,15 +1,22 @@
-# Roadmap
+# Road map
 
-- [ ] Nothing yet.
+- [ ] Nothing yet...
  
 Features that have a checkmark are complete and available for
 download in the
 [CI build](http://vsixgallery.com/extension/cd92c0c6-2c32-49a3-83ca-0dc767c7d78e/).
 
-# Changelog
+# Change log
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 1.3
+
+**2016-07-29**
+
+- [x] Extension load optimizations
+- [x] Memory allocation fixes
 
 ## 1.2
 
