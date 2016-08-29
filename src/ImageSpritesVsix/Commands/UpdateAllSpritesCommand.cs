@@ -11,16 +11,11 @@ namespace ImageSpritesVsix
 {
     internal sealed class UpdateAllSpritesCommand
     {
-        private readonly Package _package;
         private Project _project;
         private Solution2 _solution;
 
-        private UpdateAllSpritesCommand(Package package)
+        private UpdateAllSpritesCommand(OleMenuCommandService commandService)
         {
-            _package = package;
-
-            var commandService = (OleMenuCommandService)ServiceProvider.GetService(typeof(IMenuCommandService));
-
             var id = new CommandID(PackageGuids.guidImageSpriteCmdSet, PackageIds.UpdateAllSprite);
             var cmd = new OleMenuCommand(Execute, id);
             cmd.BeforeQueryStatus += BeforeQueryStatus;
@@ -29,14 +24,10 @@ namespace ImageSpritesVsix
 
         public static UpdateAllSpritesCommand Instance { get; private set; }
 
-        private IServiceProvider ServiceProvider
+        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
         {
-            get { return _package; }
-        }
-
-        public static void Initialize(Package package)
-        {
-            Instance = new UpdateAllSpritesCommand(package);
+            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+            Instance = new UpdateAllSpritesCommand(commandService);
         }
 
         private void BeforeQueryStatus(object sender, EventArgs e)

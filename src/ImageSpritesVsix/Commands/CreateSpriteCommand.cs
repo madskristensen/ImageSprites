@@ -11,14 +11,8 @@ namespace ImageSpritesVsix
 {
     internal sealed class CreateSpriteCommand
     {
-        private readonly Package _package;
-
-        private CreateSpriteCommand(Package package)
+        private CreateSpriteCommand(OleMenuCommandService commandService)
         {
-            _package = package;
-
-            var commandService = (OleMenuCommandService)ServiceProvider.GetService(typeof(IMenuCommandService));
-
             var id = new CommandID(PackageGuids.guidImageSpriteCmdSet, PackageIds.CreateSprite);
             var cmd = new OleMenuCommand(Execute, id);
             cmd.BeforeQueryStatus += BeforeQueryStatus;
@@ -27,14 +21,10 @@ namespace ImageSpritesVsix
 
         public static CreateSpriteCommand Instance { get; private set; }
 
-        private IServiceProvider ServiceProvider
+        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
         {
-            get { return _package; }
-        }
-
-        public static void Initialize(Package package)
-        {
-            Instance = new CreateSpriteCommand(package);
+            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+            Instance = new CreateSpriteCommand(commandService);
         }
 
         private void BeforeQueryStatus(object sender, EventArgs e)

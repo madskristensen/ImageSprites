@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace ImageSpritesVsix
 {
-    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionHasSingleProject, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionHasMultipleProjects, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasSingleProject, PackageAutoLoadFlags.None)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasMultipleProjects, PackageAutoLoadFlags.None)]
     [Guid(PackageGuids.guidPackageString)]
-    internal sealed class ImageSpritePackage : Package
+    internal sealed class ImageSpritePackage : AsyncPackage
     {
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            Logger.Initialize(this, Vsix.Name);
+            await Logger.InitializeAsync(this, Vsix.Name);
 
-            SpriteService.Initialize();
-            CreateSpriteCommand.Initialize(this);
-            UpdateSpriteCommand.Initialize(this);
-            UpdateAllSpritesCommand.Initialize(this);
-
-            base.Initialize();
+            await SpriteService.Initialize();
+            await CreateSpriteCommand.Initialize(this);
+            await UpdateSpriteCommand.Initialize(this);
+            await UpdateAllSpritesCommand.Initialize(this);
         }
     }
 }

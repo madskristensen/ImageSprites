@@ -11,12 +11,8 @@ namespace ImageSpritesVsix
         private readonly Package _package;
         private static readonly string[] _allowd = { ".png", ".jpg", ".jpeg", ".gif" };
 
-        private UpdateSpriteCommand(Package package)
+        private UpdateSpriteCommand(OleMenuCommandService commandService)
         {
-            _package = package;
-
-            var commandService = (OleMenuCommandService)ServiceProvider.GetService(typeof(IMenuCommandService));
-
             var id = new CommandID(PackageGuids.guidImageSpriteCmdSet, PackageIds.UpdateSprite);
             var cmd = new OleMenuCommand(Execute, id);
             cmd.BeforeQueryStatus += BeforeQueryStatus;
@@ -24,15 +20,11 @@ namespace ImageSpritesVsix
         }
 
         public static UpdateSpriteCommand Instance { get; private set; }
-
-        private IServiceProvider ServiceProvider
+        
+        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
         {
-            get { return _package; }
-        }
-
-        public static void Initialize(Package package)
-        {
-            Instance = new UpdateSpriteCommand(package);
+            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+            Instance = new UpdateSpriteCommand(commandService);
         }
 
         private void BeforeQueryStatus(object sender, EventArgs e)

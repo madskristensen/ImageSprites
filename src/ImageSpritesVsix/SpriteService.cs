@@ -11,14 +11,17 @@ namespace ImageSpritesVsix
     {
         private static SpriteImageGenerator _generator;
 
-        public static void Initialize()
+        public static async Task Initialize()
         {
-            SpriteDocument.Saving += SpriteSaving;
-            SpriteDocument.Saved += SpriteSaved;
+            await Task.Run(() =>
+            {
+                SpriteDocument.Saving += SpriteSaving;
+                SpriteDocument.Saved += SpriteSaved;
 
-            _generator = new SpriteImageGenerator();
-            _generator.Saving += SpriteImageSaving;
-            _generator.Saved += SpriteImageSaved;
+                _generator = new SpriteImageGenerator();
+                _generator.Saving += SpriteImageSaving;
+                _generator.Saved += SpriteImageSaved;
+            });
         }
 
         private static async void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
