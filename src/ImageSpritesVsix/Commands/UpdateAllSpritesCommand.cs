@@ -44,7 +44,7 @@ namespace ImageSpritesVsix
             if (!Directory.Exists(folder))
                 return;
 
-            var files = GetFiles(folder, "*.sprite");
+            var files = GetFiles(folder,  "*" + Constants.FileExtension);
 
             foreach (var file in files)
             {

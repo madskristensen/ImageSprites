@@ -20,7 +20,7 @@ namespace ImageSpritesVsix
         }
 
         public static UpdateSpriteCommand Instance { get; private set; }
-        
+
         public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
         {
             var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
@@ -32,7 +32,7 @@ namespace ImageSpritesVsix
             var button = (OleMenuCommand)sender;
             var files = ProjectHelpers.GetSelectedItemPaths();
 
-            var isSprite = files.Count() == 1 && Path.GetExtension(files.First()) == Constants.FileExtension;
+            var isSprite = files.Count() == 1 && Path.GetExtension(files.First()).Equals(Constants.FileExtension, StringComparison.OrdinalIgnoreCase);
 
             button.Enabled = button.Visible = isSprite;
         }
