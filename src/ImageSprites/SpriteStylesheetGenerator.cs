@@ -40,6 +40,13 @@ namespace ImageSprites
                     sb.AppendLine($"\tbackground-position: -{fragment.X}px -{fragment.Y}px;");
                     sb.AppendLine("}");
                 }
+                else if (doc.Stylesheet == Stylesheet.Styl)
+                {
+                    sb.AppendLine(GetSelector(fragment.ID, mainClass, doc.Stylesheet));
+                    sb.AppendLine($"\twidth {fragment.Width}px");
+                    sb.AppendLine($"\theigh {fragment.Height}px");
+                    sb.AppendLine($"\tbackground-position -{fragment.X}px -{fragment.Y}px");
+                }
                 else
                 {
                     sb.AppendLine(GetSelector(fragment.ID, mainClass, doc.Stylesheet) + " {");
@@ -90,6 +97,8 @@ namespace ImageSprites
                     return $".{mainClass}-{ident}()";
                 case Stylesheet.Scss:
                     return $"@mixin {mainClass}-{ident}()";
+                case Stylesheet.Styl:
+                    return $"{mainClass}-{ident}()";
                 default: // CSS
                     return $".{mainClass}.{ident}";
             }

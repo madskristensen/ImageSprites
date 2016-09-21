@@ -71,8 +71,7 @@ namespace ImageSpritesVsix
 
         internal static void OnVisibilityChanged(bool isVisible)
         {
-            if (VisibilityChanged != null)
-                VisibilityChanged(null, isVisible);
+            VisibilityChanged?.Invoke(null, isVisible);
         }
     }
 }

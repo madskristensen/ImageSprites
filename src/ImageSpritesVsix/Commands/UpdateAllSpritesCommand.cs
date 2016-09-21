@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
-using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
@@ -24,9 +23,8 @@ namespace ImageSpritesVsix
 
         public static UpdateAllSpritesCommand Instance { get; private set; }
 
-        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
+        public static void Initialize(OleMenuCommandService commandService)
         {
-            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new UpdateAllSpritesCommand(commandService);
         }
 

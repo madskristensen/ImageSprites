@@ -15,6 +15,9 @@ namespace ImageSprites
         Less,
 
         /// <summary>Produce a .scss file.</summary>
-        Scss
+        Scss,
+
+        /// <summary>Produce a .styl file.</summary>
+        Styl
     }
 }

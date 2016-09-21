@@ -21,9 +21,8 @@ namespace ImageSpritesVsix
 
         public static CreateSpriteCommand Instance { get; private set; }
 
-        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
+        public static void Initialize(OleMenuCommandService commandService)
         {
-            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new CreateSpriteCommand(commandService);
         }
 

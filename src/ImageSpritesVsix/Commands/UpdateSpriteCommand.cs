@@ -8,7 +8,6 @@ namespace ImageSpritesVsix
 {
     internal sealed class UpdateSpriteCommand
     {
-        private readonly Package _package;
         private static readonly string[] _allowd = { ".png", ".jpg", ".jpeg", ".gif" };
 
         private UpdateSpriteCommand(OleMenuCommandService commandService)
@@ -21,9 +20,8 @@ namespace ImageSpritesVsix
 
         public static UpdateSpriteCommand Instance { get; private set; }
 
-        public static async System.Threading.Tasks.Task Initialize(AsyncPackage package)
+        public static void Initialize(OleMenuCommandService commandService)
         {
-            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new UpdateSpriteCommand(commandService);
         }
 

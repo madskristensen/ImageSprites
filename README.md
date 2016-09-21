@@ -26,7 +26,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Easy to create and update image sprites
 - Supports png, jpg and gif images
 - Configure vertical or horizontal sprite layouts
-- Produce LESS, Sass or CSS file with sprite image locations
+- Produce LESS, Sass, Stylus, or CSS file with sprite image locations
 - [Image Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3) integration
 - Configurable DPI for high resolution images
 - Works with both [Web Compiler](https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c)
@@ -62,7 +62,7 @@ is stored. It looks something like this:
   "stylesheet": "css",
   "pathprefix": "/images/",
   "customstyles": {
-    "display": "block"
+    "display": "inline-block"
   }
 }
 ```
@@ -87,7 +87,7 @@ feature requires the
 [Images Optimizer](https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3)
 to be installed. 
 
-**stylesheet** outputs LESS, Sass or plain CSS files to make
+**stylesheet** outputs LESS, Sass, Stylus, or plain CSS files to make
 it easy to use the image sprite in any web project.
 
 **pathprefix** adds a prefix string to the image path in
