@@ -81,7 +81,7 @@ namespace ImageSpritesTest
                 string css = File.ReadAllText(cssFile);
                 Assert.IsTrue(css.Contains(".png384.a"), "Sprite \"a.png\" not generated");
                 Assert.IsTrue(css.Contains("url('png384.sprite.png')"), "Incorrect url value");
-                Assert.IsTrue(css.Contains("display: block"), "Incorrect custom style");
+                Assert.IsTrue(css.Contains("display: inline-block"), "Incorrect custom style");
             }
             finally
             {
