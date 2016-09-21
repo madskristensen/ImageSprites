@@ -70,7 +70,7 @@ namespace ImageSprites
 
         /// <summary>The path to prepend to url in the stylesheet's "url()" function.</summary>
         [JsonProperty("customstyles")]
-        public IDictionary<string, object> CustomStyles { get; } = new Dictionary<string, object> { { "display", "block" } };
+        public IDictionary<string, object> CustomStyles { get; } = new Dictionary<string, object> { { "display", "inline-block" } };
 
         /// <summary>The file extension of the output sprite image.</summary>
         [JsonIgnore]
