@@ -1,7 +1,6 @@
 # Road map
 
 - [ ] Nothing yet...
-- [x] Stylus support
  
 Features that have a checkmark are complete and available for
 download in the
@@ -12,16 +11,16 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
-## 1.3
+## 1.4
 
-**2016-07-29**
+- [x] Stylus support
+
+## 1.3
 
 - [x] Extension load optimizations
 - [x] Memory allocation fixes
 
 ## 1.2
-
-**2016-05-25**
 
 - [x] Uploading JSON schema to [SchemaStore.org](http://schemastore.org)
 - [x] Reload schemas when .sprite file is opened 
@@ -30,8 +29,6 @@ on the official Visual Studio extension gallery.
 - [x] Add custom CSS declarations to the generated stylesheet
 
 ## 1.1
-
-**2016-05-23**
 
 - [x] Updated format of .sprite JSON to use name-file pairs
 - [x] Generated file names all contain *.sprite* in them
@@ -42,8 +39,6 @@ on the official Visual Studio extension gallery.
 - [x] Logo watermark in .sprite files 
 
 ## 1.0
-
-**2016-05-22**
 
 - [x] Sprite image generation
 - [x] Command for creating .sprite files

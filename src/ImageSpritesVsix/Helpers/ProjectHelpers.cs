@@ -30,9 +30,16 @@ namespace ImageSpritesVsix
 
         internal static void ExecuteCommand(string name)
         {
-            var command = DTE.Commands.Item(name);
-            if (command.IsAvailable)
-                DTE.ExecuteCommand(name);
+            try
+            {
+                var command = DTE.Commands.Item(name);
+                if (command.IsAvailable)
+                    DTE.ExecuteCommand(name);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex);
+            }
         }
 
         public static IEnumerable<ProjectItem> GetSelectedItems()
