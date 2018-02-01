@@ -1,0 +1,17 @@
+{
+	"images": {
+		"a": "images/96dpi/a.png",
+		"b": "images/96dpi/b.png",
+		"c": "images/96dpi/c.png",
+		"d": "images/96dpi/d.png"
+	},
+	"orientation": "horizontal",
+	"padding": 20,
+	"output": "jpg",
+	"stylesheet": "css",
+	"customstyles": {
+		"display": "block",
+		"margin": 0
+	},
+	"appendcachebustspritesuffix":  "true"
+}
