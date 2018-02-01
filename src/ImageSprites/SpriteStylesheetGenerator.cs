@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,15 @@ namespace ImageSprites
             string outputFile = doc.FileName + "." + doc.Stylesheet.ToString().ToLowerInvariant();
             var outputDirectory = Path.GetDirectoryName(outputFile);
             var bgUrl = doc.PathPrefix + SpriteHelpers.MakeRelative(outputFile, doc.FileName + doc.OutputExtension);
+            if (doc.AppendCacheBustSpriteSuffix)
+            {
+                using (HashAlgorithm sha = new SHA256Managed())
+                {
+                    byte[] spriteContent = File.ReadAllBytes(doc.FileName + doc.OutputExtension);
+                    string spriteHash = Convert.ToBase64String(sha.ComputeHash(spriteContent));
+                    bgUrl += $"?hash={spriteHash}";
+                }
+            }
 
             StringBuilder sb = new StringBuilder(GetDescription(doc.Stylesheet));
 

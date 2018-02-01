@@ -72,6 +72,10 @@ namespace ImageSprites
         [JsonProperty("customstyles")]
         public IDictionary<string, object> CustomStyles { get; } = new Dictionary<string, object> { { "display", "inline-block" } };
 
+        /// <summary>Flag that determines whether the sprite url in the generated stylesheet will be suffixed by a unique hash for cache busting purposes.</summary>
+        [JsonProperty("appendcachebustspritesuffix")]
+        public bool AppendCacheBustSpriteSuffix { get; set; } = false;
+
         /// <summary>The file extension of the output sprite image.</summary>
         [JsonIgnore]
         public string OutputExtension

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ImageSprites;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -82,6 +83,33 @@ namespace ImageSpritesTest
                 Assert.IsTrue(css.Contains(".png384.a"), "Sprite \"a.png\" not generated");
                 Assert.IsTrue(css.Contains("url('png384.sprite.png')"), "Incorrect url value");
                 Assert.IsTrue(css.Contains("display: inline-block"), "Incorrect custom style");
+            }
+            finally
+            {
+                File.Delete(imgFile);
+                File.Delete(cssFile);
+            }
+        }
+
+        [TestMethod]
+        public async Task CacheBustHash()
+        {
+            var fileName = Path.Combine(_artifacts, "hash.sprite");
+            var imgFile = fileName + ".jpg";
+            var cssFile = fileName + ".css";
+
+            try
+            {
+                var doc = await SpriteDocument.FromFile(fileName);
+                await _generator.Generate(doc);
+
+                using (HashAlgorithm hash = new SHA256Managed())
+                {
+                    string imgHash = Convert.ToBase64String(hash.ComputeHash(File.ReadAllBytes(imgFile)));
+
+                    string css = File.ReadAllText(cssFile);
+                    Assert.IsTrue(css.Contains($"?hash={imgHash}"), "Sprite hash not generated");
+                }
             }
             finally
             {
