@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ImageSprites;
@@ -106,9 +107,8 @@ namespace ImageSpritesTest
                 using (HashAlgorithm hash = new SHA256Managed())
                 {
                     string imgHash = Convert.ToBase64String(hash.ComputeHash(File.ReadAllBytes(imgFile)));
-
                     string css = File.ReadAllText(cssFile);
-                    Assert.IsTrue(css.Contains($"?hash={imgHash}"), "Sprite hash not generated");
+                    Assert.IsTrue(css.Contains($"?hash={WebUtility.UrlEncode(imgHash)}"), "Sprite hash not generated");
                 }
             }
             finally

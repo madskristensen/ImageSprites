@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace ImageSprites
                 {
                     byte[] spriteContent = File.ReadAllBytes(doc.FileName + doc.OutputExtension);
                     string spriteHash = Convert.ToBase64String(sha.ComputeHash(spriteContent));
-                    bgUrl += $"?hash={spriteHash}";
+                    bgUrl += $"?hash={WebUtility.UrlEncode(spriteHash)}";
                 }
             }
 
