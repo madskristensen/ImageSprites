@@ -38,7 +38,7 @@ namespace ImageSpritesVsix
         private async void Execute(object sender, EventArgs e)
         {
             var files = ProjectHelpers.GetSelectedItemPaths();
-            await SpriteService.GenerateSprite(files.First());
+            await SpriteService.GenerateSpriteAsync(files.First());
         }
     }
 }

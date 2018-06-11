@@ -47,7 +47,7 @@ namespace ImageSpritesVsix
 
                 await doc.Save();
                 ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);
-                await SpriteService.GenerateSprite(doc);
+                await SpriteService.GenerateSpriteAsync(doc);
             }
         }
 

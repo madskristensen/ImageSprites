@@ -41,7 +41,7 @@ namespace ImageSpritesVsix
         {
             if (e.FileActionType == FileActionTypes.ContentSavedToDisk)
             {
-                await SpriteService.GenerateSprite(e.FilePath);
+                await SpriteService.GenerateSpriteAsync(e.FilePath);
             }
         }
     }

@@ -24,17 +24,22 @@ namespace ImageSpritesVsix
             if (DTE.SourceControl.IsItemUnderSCC(file) && !DTE.SourceControl.IsItemCheckedOut(file))
                 DTE.SourceControl.CheckOutItem(file);
 
-            FileInfo info = new FileInfo(file);
-            info.IsReadOnly = false;
+            var info = new FileInfo(file)
+            {
+                IsReadOnly = false
+            };
         }
 
-        internal static void ExecuteCommand(string name)
+        internal static void ExecuteCommand(string name, string argument = null)
         {
             try
             {
-                var command = DTE.Commands.Item(name);
-                if (command.IsAvailable)
-                    DTE.ExecuteCommand(name);
+                Command command = DTE.Commands.Item(name);
+
+                if (command != null && command.IsAvailable)
+                {
+                    DTE.Commands.Raise(command.Guid, command.ID, argument, null);
+                }
             }
             catch (Exception ex)
             {

@@ -46,7 +46,7 @@ namespace ImageSpritesVsix
 
             foreach (var file in files)
             {
-                await SpriteService.GenerateSprite(file);
+                await SpriteService.GenerateSpriteAsync(file);
             }
         }
 

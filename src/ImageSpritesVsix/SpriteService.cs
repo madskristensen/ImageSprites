@@ -11,28 +11,19 @@ namespace ImageSpritesVsix
     {
         private static SpriteImageGenerator _generator;
 
-        public static async Task Initialize()
+        public static void Initialize()
         {
-            await Task.Run(() =>
-            {
-                SpriteDocument.Saving += SpriteSaving;
-                SpriteDocument.Saved += SpriteSaved;
+            SpriteDocument.Saving += SpriteSaving;
+            SpriteDocument.Saved += SpriteSaved;
 
-                _generator = new SpriteImageGenerator();
-                _generator.Saving += SpriteImageSaving;
-                _generator.Saved += SpriteImageSaved;
-            });
+            _generator = new SpriteImageGenerator();
+            _generator.Saving += SpriteImageSaving;
+            _generator.Saved += SpriteImageSaved;
         }
 
-        private static async void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
+        private static void SpriteImageSaved(object sender, SpriteImageGenerationEventArgs e)
         {
             ProjectHelpers.AddNestedFile(e.Document.FileName, e.FileName);
-
-            var project = ProjectHelpers.DTE.Solution.FindProjectItem(e.Document.FileName)?.ContainingProject;
-
-            if (project != null && project.IsKind(ProjectHelpers.ProjectTypes.ASPNET_5))
-                await Task.Delay(2000);
-
             OptimizeImage(e.FileName, e.Document.Optimize);
         }
 
@@ -44,13 +35,12 @@ namespace ImageSpritesVsix
 
                 if (optimization != Optimization.None && Constants.SupporedExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase))
                 {
-                    ProjectHelpers.SelectInSolutionExplorer(fileName);
-                    string cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossless";
+                    string cmd = "ImageOptimizer.OptimizeLossless";
 
                     if (optimization == Optimization.Lossy)
-                        cmd = "ProjectandSolutionContextMenus.Project.ImageOptimizer.OptimzeImagelossy";
+                        cmd = "ImageOptimizer.OptimizeLossy";
 
-                    ProjectHelpers.ExecuteCommand(cmd);
+                    ProjectHelpers.ExecuteCommand(cmd, fileName);
                 }
             }
             catch (Exception ex)
@@ -82,12 +72,12 @@ namespace ImageSpritesVsix
             }
         }
 
-        public static async Task GenerateSprite(string fileName)
+        public static async Task GenerateSpriteAsync(string fileName)
         {
             try
             {
                 var doc = await SpriteDocument.FromFile(fileName);
-                await GenerateSprite(doc);
+                await GenerateSpriteAsync(doc);
             }
             catch (SpriteParseException ex)
             {
@@ -100,7 +90,7 @@ namespace ImageSpritesVsix
             }
         }
 
-        public static async Task GenerateSprite(SpriteDocument doc)
+        public static async Task GenerateSpriteAsync(SpriteDocument doc)
         {
             try
             {
