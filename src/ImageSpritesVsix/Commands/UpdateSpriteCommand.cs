@@ -28,16 +28,16 @@ namespace ImageSpritesVsix
         private void BeforeQueryStatus(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            var files = ProjectHelpers.GetSelectedItemPaths();
+            System.Collections.Generic.IEnumerable<string> files = ProjectHelpers.GetSelectedItemPaths();
 
-            var isSprite = files.Count() == 1 && Path.GetExtension(files.First()).Equals(Constants.FileExtension, StringComparison.OrdinalIgnoreCase);
+            bool isSprite = files.Count() == 1 && Path.GetExtension(files.First()).Equals(Constants.FileExtension, StringComparison.OrdinalIgnoreCase);
 
             button.Enabled = button.Visible = isSprite;
         }
 
         private async void Execute(object sender, EventArgs e)
         {
-            var files = ProjectHelpers.GetSelectedItemPaths();
+            System.Collections.Generic.IEnumerable<string> files = ProjectHelpers.GetSelectedItemPaths();
             await SpriteService.GenerateSpriteAsync(files.First());
         }
     }

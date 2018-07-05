@@ -42,9 +42,9 @@ namespace ImageSpritesVsix
             if (!Directory.Exists(folder))
                 return;
 
-            var files = GetFiles(folder,  "*" + Constants.FileExtension);
+            List<string> files = GetFiles(folder,  "*" + Constants.FileExtension);
 
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 await SpriteService.GenerateSpriteAsync(file);
             }
@@ -60,7 +60,7 @@ namespace ImageSpritesVsix
             try
             {
                 files.AddRange(Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly));
-                foreach (var directory in Directory.GetDirectories(path))
+                foreach (string directory in Directory.GetDirectories(path))
                     files.AddRange(GetFiles(directory, pattern));
             }
             catch { }

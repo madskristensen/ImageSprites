@@ -29,25 +29,31 @@ namespace ImageSpritesVsix
         private void BeforeQueryStatus(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
-            var files = GetFiles();
+            IEnumerable<string> files = GetFiles();
 
             button.Enabled = button.Visible = files.Any();
         }
 
-        private async void Execute(object sender, EventArgs e)
+        private void Execute(object sender, EventArgs e)
         {
-            var files = GetFiles();
-            var folder = Path.GetDirectoryName(files.First());
-            string spriteFile;
+            IEnumerable<string> files = GetFiles();
+            string folder = Path.GetDirectoryName(files.First());
 
-            if (GetFileName(folder, out spriteFile))
+            if (GetFileName(folder, out string spriteFile))
             {
-                var doc = new SpriteDocument(spriteFile, files);
-                doc.Stylesheet = Stylesheet.Css;
+                var doc = new SpriteDocument(spriteFile, files)
+                {
+                    Stylesheet = Stylesheet.Css
+                };
 
-                await doc.Save();
-                ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);
-                await SpriteService.GenerateSpriteAsync(doc);
+                ThreadHelper.JoinableTaskFactory.Run(async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                    await doc.Save();
+                    ProjectHelpers.DTE.ItemOperations.OpenFile(doc.FileName);
+                    await SpriteService.GenerateSpriteAsync(doc);
+                });
             }
         }
 
@@ -63,7 +69,9 @@ namespace ImageSpritesVsix
                 dialog.Filter = "Sprite files | *" + Constants.FileExtension;
 
                 if (dialog.ShowDialog() != DialogResult.OK)
+                {
                     return false;
+                }
 
                 fileName = dialog.FileName;
             }

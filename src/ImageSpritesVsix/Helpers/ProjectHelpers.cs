@@ -191,7 +191,7 @@ namespace ImageSpritesVsix
 
         public static bool IsKind(this Project project, params string[] kindGuids)
         {
-            foreach (var guid in kindGuids)
+            foreach (string guid in kindGuids)
             {
                 if (project.Kind.Equals(guid, StringComparison.OrdinalIgnoreCase))
                     return true;
@@ -242,7 +242,7 @@ namespace ImageSpritesVsix
 
                 if (doc != null && !string.IsNullOrEmpty(doc.FullName))
                 {
-                    var item = DTE.Solution?.FindProjectItem(doc.FullName);
+                    ProjectItem item = DTE.Solution?.FindProjectItem(doc.FullName);
 
                     if (item != null)
                         return item.ContainingProject;

@@ -23,7 +23,7 @@ namespace ImageSpritesVsix
 
         public DragDropPointerEffects HandleDataDropped(DragDropInfo dragDropInfo)
         {
-            var position = dragDropInfo.VirtualBufferPosition.Position;
+            Microsoft.VisualStudio.Text.SnapshotPoint position = dragDropInfo.VirtualBufferPosition.Position;
             var doc = SpriteDocument.FromJSON(_view.TextBuffer.CurrentSnapshot.GetText(), _documentFileName);
 
             string ident = SpriteHelpers.GetIdentifier(_draggedFileName);
@@ -34,7 +34,7 @@ namespace ImageSpritesVsix
 
             doc.Images.Add(new KeyValuePair<string, string>(ident, file));
 
-            using (var edit = _view.TextBuffer.CreateEdit())
+            using (Microsoft.VisualStudio.Text.ITextEdit edit = _view.TextBuffer.CreateEdit())
             {
                 edit.Replace(0, _view.TextBuffer.CurrentSnapshot.Length, doc.ToJsonString());
                 edit.Apply();
@@ -70,7 +70,7 @@ namespace ImageSpritesVsix
             if (info.Data.GetDataPresent("FileDrop"))
             {
                 // The drag and drop operation came from the file system
-                var files = data.GetFileDropList();
+                System.Collections.Specialized.StringCollection files = data.GetFileDropList();
 
                 if (files != null && files.Count == 1)
                 {

@@ -18,12 +18,10 @@ namespace ImageSpritesVsix
     {
         protected override async task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            await Logger.InitializeAsync(this, Vsix.Name);
-            SpriteService.Initialize();
-
-            var commandService = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-
             await JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            await Logger.InitializeAsync(this, Vsix.Name);
+            var commandService = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
 
             CreateSpriteCommand.Initialize(commandService);
             UpdateSpriteCommand.Initialize(commandService);

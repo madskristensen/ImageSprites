@@ -22,7 +22,7 @@ namespace ImageSpritesVsix
 
         public void VsTextViewCreated(IVsTextView textViewAdapter)
         {
-            var textView = EditorAdaptersFactoryService.GetWpfTextView(textViewAdapter);
+            IWpfTextView textView = EditorAdaptersFactoryService.GetWpfTextView(textViewAdapter);
             ITextDocument doc;
 
             if (TextDocumentFactoryService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out doc))
@@ -37,11 +37,11 @@ namespace ImageSpritesVsix
             }
         }
 
-        private async void DocumentSaved(object sender, TextDocumentFileActionEventArgs e)
+        private void DocumentSaved(object sender, TextDocumentFileActionEventArgs e)
         {
             if (e.FileActionType == FileActionTypes.ContentSavedToDisk)
             {
-                await SpriteService.GenerateSpriteAsync(e.FilePath);
+                SpriteService.GenerateSpriteAsync(e.FilePath).ConfigureAwait(false);
             }
         }
     }

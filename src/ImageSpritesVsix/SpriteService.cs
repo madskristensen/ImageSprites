@@ -11,7 +11,7 @@ namespace ImageSpritesVsix
     {
         private static SpriteImageGenerator _generator;
 
-        public static void Initialize()
+        static SpriteService()
         {
             SpriteDocument.Saving += SpriteSaving;
             SpriteDocument.Saved += SpriteSaved;
@@ -56,7 +56,7 @@ namespace ImageSpritesVsix
 
         private static void SpriteSaved(object sender, FileSystemEventArgs e)
         {
-            var project = ProjectHelpers.GetActiveProject();
+            EnvDTE.Project project = ProjectHelpers.GetActiveProject();
 
             if (project != null)
             {
@@ -76,7 +76,7 @@ namespace ImageSpritesVsix
         {
             try
             {
-                var doc = await SpriteDocument.FromFile(fileName);
+                SpriteDocument doc = await SpriteDocument.FromFile(fileName);
                 await GenerateSpriteAsync(doc);
             }
             catch (SpriteParseException ex)
