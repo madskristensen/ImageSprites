@@ -135,7 +135,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Madskristensen.VisualStudio.SDK" Version="14.0.0-alpha9" />
+    <PackageReference Include="Madskristensen.VisualStudio.SDK" Version="14.0.0-beta1" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools">
       <Version>15.8.3247</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
